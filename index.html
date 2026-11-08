@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menphis RPG</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cinzel+Decorative:wght@700&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#1e1604;--bg2:#150f02;--card:#2b1f06;--tx:#f0dfb0;--mut:#b9a56e;--ac:#f5d98a;--ac2:#c9a227;--bd:#7a5f22}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3e8c8;--bg2:#e6d5a4;--card:#fbf3dc;--tx:#2b1f06;--mut:#6d5a28;--ac:#7a4e00;--ac2:#a67c00;--bd:#b9a060}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font:16px/1.6 Georgia,"Times New Roman",serif;background:radial-gradient(circle at 15% 0,#4a3510 0,transparent 45%),radial-gradient(circle at 90% 100%,#3a2508 0,transparent 40%),var(--bg);min-height:100vh}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg2);z-index:30}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:linear-gradient(var(--bg2),var(--bg));border-bottom:2px solid var(--ac2);padding:8px 12px;box-shadow:0 4px 18px #0008}
+.top{display:flex;align-items:center;gap:10px;justify-content:space-between}
+h1{margin:0;font:700 20px "Cinzel Decorative","Cinzel",Georgia,serif;color:var(--ac);letter-spacing:3px;text-shadow:0 0 12px #f5d98a66}
+#me{font-size:13px;color:var(--mut);text-align:right}#me b{color:var(--ac)}
+nav{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px}
+nav button{flex:none;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:6px;padding:5px 11px;font:600 13px "Cinzel",Georgia,serif;cursor:pointer}
+nav button.on{background:linear-gradient(var(--ac),var(--ac2));color:#1b1202;border-color:var(--ac)}
+main{max-width:960px;margin:0 auto;padding:16px 14px 110px}
+h2{font:700 26px "Cinzel Decorative","Cinzel",Georgia,serif;color:var(--ac);margin:6px 0 4px;text-align:center}
+.div{height:16px;margin:0 auto 14px;max-width:340px;background:linear-gradient(90deg,transparent,var(--ac2),transparent) center/100% 1px no-repeat;text-align:center;line-height:16px;color:var(--ac2)}
+h3{font:700 17px "Cinzel",Georgia,serif;color:var(--ac);margin:0 0 6px}
+.card{position:relative;background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--bd);border-radius:10px;padding:14px;margin:0 0 14px;box-shadow:0 3px 14px #0006,inset 0 0 0 3px #0003}
+.card::before,.card::after{content:"❖";position:absolute;font-size:10px;color:var(--ac2);opacity:.8}.card::before{top:3px;left:6px}.card::after{bottom:3px;right:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.mut{color:var(--mut);font-size:14px}.q{font-style:italic;color:var(--mut)}
+label{display:block;font-size:13px;color:var(--mut);margin-top:8px}
+input,select,textarea{width:100%;background:var(--bg2);color:var(--tx);border:1px solid var(--bd);border-radius:6px;padding:8px;font:inherit}
+input[readonly]{opacity:.75}
+.btn{background:linear-gradient(var(--ac),var(--ac2));color:#1b1202;border:0;border-radius:6px;padding:8px 14px;font:700 14px "Cinzel",Georgia,serif;cursor:pointer;margin:8px 6px 0 0;box-shadow:0 2px 6px #0007}
+.btn.s{padding:3px 9px;font-size:12px;margin:2px}.btn:disabled{opacity:.4}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:8px}
+.tag{display:inline-block;border:1px solid var(--bd);border-radius:20px;padding:1px 9px;font-size:12px;margin:2px;color:var(--mut)}
+.big{font:700 30px "Cinzel",Georgia,serif;color:var(--ac)}.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid var(--bd);padding:5px 8px;text-align:left}
+details{margin:0 0 8px}summary{cursor:pointer;color:var(--ac);font-weight:bold}
+#log div{border-bottom:1px solid var(--bd);padding:3px 0;font-size:14px}
+.bar{height:8px;background:var(--bg2);border:1px solid var(--bd);border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac2),var(--ac))}
+.hero{border-radius:12px;overflow:hidden;border:2px solid var(--ac2);margin-bottom:14px;box-shadow:0 6px 24px #000a}.hero svg{display:block;width:100%;height:auto}
+.post{border-bottom:1px solid var(--bd);padding:8px 0}.post b{color:var(--ac)}
+.mgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--bd);border:2px solid var(--ac2);max-width:640px;margin:0 auto 12px}
+.mgrid div{aspect-ratio:1;background:var(--bg2);position:relative;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mgrid div.fog{background:#000;opacity:.9}.tk{width:86%;height:86%;border-radius:50%;border:2px solid #fff8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;color:#111}.tk.sel{outline:3px solid var(--ac)}
+.chat{max-height:340px;overflow-y:auto;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:8px;margin-bottom:8px}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:360px}.mem button{aspect-ratio:1;font-size:28px;background:var(--card);border:1px solid var(--bd);border-radius:8px;color:var(--tx);cursor:pointer}
+#fab{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:64px;height:64px;border-radius:50%;border:3px solid var(--ac);background:radial-gradient(var(--card),var(--bg2));z-index:25;cursor:pointer;box-shadow:0 0 18px #f5d98a88;padding:4px}
+#rad{position:fixed;inset:0;background:#000d;z-index:40;display:none}#rad.on{display:block}
+.ri{position:absolute;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;border:2px solid var(--ac2);background:radial-gradient(var(--card),var(--bg2));color:var(--tx);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px;line-height:1;padding:0;box-shadow:0 0 10px #f5d98a55}.ri small{font-size:8px;margin-top:2px;color:var(--ac)}
+#radc{position:absolute;left:50%;top:50%;width:70px;height:70px;margin:-35px;border-radius:50%;border:3px solid var(--ac);background:var(--bg2);cursor:pointer;padding:6px}
+#gate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#3a2a0a,#0b0700);padding:16px}
+#gate .card{max-width:420px;width:100%;text-align:center}#gate svg.e{width:110px;height:110px}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ac);color:#1b1202;padding:8px 14px;border-radius:8px;z-index:70;display:none;font-weight:bold}
+</style>
+</head><body>
+<header><div class="top"><h1>MENPHIS</h1><div id="me"></div></div><nav id="nav"></nav></header>
+<main id="app"></main>
+<button id="fab" onclick="radT(1)" aria-label="Menu radial"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="#f5d98a" stroke-width="7" stroke-dasharray="190 50"/><path d="M78 30q10-6 8 4-3 4-8 2z" fill="#f5d98a"/><circle cx="50" cy="50" r="7" fill="#c9a227"/></svg></button>
+<div id="rad"><div id="radi"></div><button id="radc" onclick="radT(0)" aria-label="Fechar"><svg viewBox="0 0 100 100"><path d="M25 25L75 75M75 25L25 75" stroke="#f5d98a" stroke-width="9"/></svg></button></div>
+<div id="gate"><div class="card"><svg class="e" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#f5d98a" stroke-width="6" stroke-dasharray="200 52"/><circle cx="50" cy="50" r="26" fill="none" stroke="#c9a227" stroke-width="2"/><path d="M80 28q12-7 9 5-4 5-9 2z" fill="#f5d98a"/><circle cx="50" cy="50" r="7" fill="#f5d98a"/></svg>
+<h2 style="font-size:24px">Menphis</h2><p class="q">Os ecos do colapso aguardam, caçador.</p>
+<button class="btn" id="gc" disabled onclick="loginClaude()">Entrar com conta Claude</button><p class="mut" id="gs">Conectando ao servidor…</p>
+<label>Ou jogue como convidado (dados só neste aparelho)</label><input id="gn" placeholder="Nome do caçador" maxlength="24"><button class="btn" onclick="loginGuest()">Entrar como convidado</button></div></div>
+<div id="toast"></div>
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const store={get(k,d){try{const v=localStorage.getItem('mp_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('mp_'+k,JSON.stringify(v))}catch(e){}}};
+const ROUTES=[['inicio','Início'],['personagens','Personagens'],['dados','Dados'],['cla','Clãs'],['contratos','Contratos'],['habilidades','Habilidades'],['regras','Regras'],['guildas','Guildas'],['ferramentas','Ferramentas'],['notas','Notas']];
+const CONTRATOS={
+'Juramentos Divinos':{d:'Feitos em templos dedicados a arcanjos. Guiados por conduta, virtude e verdade; desvio das diretrizes leva à punição.',l:[
+['Juramento da Verdade (Raguel)','Detectar mentiras de até 5 alvos; resistência +70x contra ilusões; +30 no D100 em negociações honestas; proteção contra manipulação mágica até nível 5.','Perda temporária de 7 turnos das habilidades.'],
+['Juramento da Misericórdia (Zadkiel)','Cura a 5 m (leve 1 turno, médio 3, grave 5; crítico 7 por toque); resistência +50x a maldições; +30 no D100 para evitar conflitos; cura avançada e restauração de membros.','Perde 50x de força e velocidade por 7 turnos (mín. 5x) e bloqueio de cura.'],
+['Juramento da Luz (Miguel)','Manipulação de luz nível 5; detecta seres sombrios em 55 m; +70x em força, velocidade e resistência contra criaturas das trevas.','Omissão diante de injustiça: 7 turnos exausto, sem poderes plenos.'],
+['Juramento da Sabedoria (Uriel)','Runas parciais até nível 5; Encantamento Antigo “Lumen Aeternum” (+70x por 5 turnos, recarga −3); +40 no D100 em julgamento; bloqueio psíquico até nível 5.','7 turnos sem clareza mental, sem decisões significativas.']]},
+'Alianças Mortais':{d:'Feitas em masmorras ou cavernas com a alma de uma antiga entidade ambiciosa, mantida nas Máscaras da Morte. O portador é parcialmente dominado pela entidade.',l:[
+['Máscara da Loucura (Veregor)','Ilusão nível 5; controla medos de até 3 alvos por 5 turnos; desloca entre dimensões 1x/turno; −50x de inteligência nos oponentes; absorve 50% de ataques psíquicos.','Após 3 usos excessivos: surto, d20 (1–7 inofensivo, 8–14 perigoso, 15–20 muito perigoso).'],
+['Máscara da Beleza','Manipula emoções nível 5; transformação por 7 turnos; raio de 50 m exige D100 com penalidade 30 para agir contra a usuária.','Mais de 3 usos seguidos: envelhecimento, perda de memória, fraqueza 10x por 7 turnos.'],
+['Máscara da Fortuna (Caelus Vortem)','Sorte nível 5; “Virada de Destino” altera rolagens (3 usos, 1 por turno); +35 nas rolagens D100 do narrador.','Passou de 3 usos: 10% de Desgaste de Sorte e azar de −50 com desvantagem.'],
+['Máscara da Morte (Kalathos)','Necromancia nível 5; absorve energia vital de 3 alvos por 5 turnos; revive até 25 cadáveres (50x físico); Fantasmas por 3 turnos; imunidade temporária a drenagem.','3 usos seguidos: perde 50% da energia vital por 5 turnos (d20 define a gravidade).']]},
+'Pactos Amaldiçoados':{d:'Feitos com maldições autônomas geradas no Plano dos Sonhos a partir de sentimentos ruins e pesadelos. O portador vira receptáculo.',l:[
+['Maldição do Sangue','Manipulação de sangue; regeneração rápida (não cura EP); sente sangue a 30 m; Sede de Sangue: +70x de velocidade, até +210x ao ingerir 500 ml.','Vulnerável ao sol (−10 EP/turno); sem sangue por 6 turnos perde 10 EP e 10x/turno. Dever: oferenda todo domingo.'],
+['Maldição da Solidão','Frio nível 5; invisibilidade 6 turnos; +30 no D100; Relíquia do Exílio (+30x por turno, máx. +210x); Evaporação Noturna.','Sem comunicar por 5 turnos ao resistir; perto de alguém >10 turnos congela (−10x mobilidade/turno).'],
+['Maldição do Devorador','Matéria orgânica nível 5; detecta presas a 80 m; muda o corpo ao devorar; Fome Absoluta (poder dobra 5 turnos, sacrifica memória/órgão); 20 EP = +10x (limite +270x).','>10 turnos sem comer: −5x de inteligência por turno. Dever: devorar um ser inteligente por domingo.'],
+['Maldição da Peste','Pestilência nível 5; imunidade a venenos; transmite a peste por toque; Deterioração do Terceiro Cavaleiro (consome 100% de um atributo do alvo; recarga 10 turnos).','Negligenciar >7 turnos: ossos frágeis e tosse; sem nova alma em 15 turnos após grande sacrifício: desintegra.']]},
+'Vínculos Espirituais':{d:'Contratos com espíritos da natureza; só concedem poder a quem é digno de sua confiança e conduta.',l:[
+['Espírito do Fogo','Fogo nível 5; imunidade a queimaduras; magias de fogo +70x; Chama Sagrada da Eternidade; Salamandra Vulcânica (nível 7, 5 turnos, recarga 7).','Desonrar o espírito: o fogo se volta contra você e a salamandra some.'],
+['Espírito de Água','Água nível 5; forma de tritão; +70x físico em ambientes úmidos; intangível 5 turnos; Guardiã das Profundezas (nível 7).','Selado: sede insaciável e poder físico reduzido para 10x.'],
+['Espírito do Vento','Vento nível 5; peso de pena; velocidade +100x; neblina de 50 m; Vendaval Pula-Nuvem (nível 7).','Percepção distorcida, vozes e movimentos imprevisíveis.'],
+['Espírito da Terra','Terra nível 5; sente vibrações a 50 m; resistência +100x; −20 de mana por magia; Sombra do Colosso (nível 7, até 50 m).','O corpo enrijece até petrificar por completo.']]},
+'Troca Equivalente':{d:'Trato entre duas partes mágicas, regido pela Lei da Equivalência (“nada se cria, nada se perde, tudo se transforma”). Firmado com sangue e ritual. Poderes, deveres e punições são decididos entre as partes e a administração; a punição mínima por descumprir é perder tudo até compensar o valor.',l:[]}};
+const HAB=[
+['Mana Expressão','Nível 4 e 70x de inteligência. Sentimentos viram combustível mágico (conhecimento do Clã dos Elfos).',
+'Positiva: Paciência (+4 turnos, +60x resistências), Amor (regeneração nível 4), Compaixão (escudo de 200 EP), Alegria (+60x velocidade, área ×2), Esperança (+40 m de alcance, dissipa trevas). Negativa: Ansiedade (d6: vibração, explosão ou origem aleatória em 40 m), Ódio (queima 50 EP), Ganância (duplica ou drena), Tristeza (−40x força e velocidade), Medo (ilusões e trevas). Treino: cena de 40 linhas e d20 (1–10 fracasso, 11–20 sucesso); 3 sucessos dominam, 3 fracassos causam Possessão Amaldiçoada. Exaustão: 7º uso +50% de mana, 8º dobro, 9º triplo com perda de memória; após 10 usos, descanso igual. Nível 7: Herdeiro do Vazio (+100x em atributos, regeneração nível 7, relíquias e alterações corporais) ou Exorcista Espiritual (Expurgo Divino, Decreto Sagrado, Chama da Redenção e Talismãs Sagrados).'],
+['Artes Marciais de Fluxo','100x de maestria com uma arma; humanos não têm fluxo.',
+'Noção de combate (+70x reação), Foco Potencializador (+40x força), Passos Leves (+40x velocidade e ataque), Trilha do combate (+50x maestria). Treino: 3 cenas de 50 linhas, uma por dia. Fluxo dá +40x em magias para armas e corte de 10x por nível. Até 9 estilos: 3 de ataque, 3 de defesa e 3 de movimentação.'],
+['Elo da Alma','Exige Mana Expressão e Arte Marcial de Fluxo.',
+'Passo 1: nível 4 de Elo (3.000 XP; cada nível custa +300). Passo 2: missão Extrema Caurido para achar o Totem Espiritual. Passo 3: Ferreiro de Almas lendário. Nível 6: Shikai (+50% EP, +80x técnicas, 15 turnos, habilidade especial). Nível 8: Bankai após 3 testes (+100% EP, +250x, +2 habilidades, 7 turnos, manifestação completa).'],
+['Ki','Nível 7 e 80x de inteligência (monges: nível 4 e 50x). Só funciona em seres vivos.',
+'Cena de 400 palavras e 3 provações Rank A. Passo das Nuvens (+90x velocidade), Terceiro Olho (70 m), Combustão Mágica (+70x ou absorve 200 de mana a cada 5 turnos), Fulgor Negro (25 de mana, +90x; d20 acima de 15 gera segundo golpe invisível).']];
+const GUILDAS=[['Leões Carmesim','Leste de Quanti, castelo de pedra vermelha cercado por vilarejo medieval.','Animalos, Dracônicos, Lobisomens, Mutantes e Elfos'],['Luar Crescente','Sul de Quanti, praia de Zero Quadrant, jardins bioluminescentes.','Centauros, Androides, Zumbis, Mutantes, Valquírias e Tritões'],['Águia Imperial','Norte de Quanti, cidade-guilda de mármore e tecnologia.','Humanos, Magos, Trolls, Gigantes, Fadas e Anjos'],['Black Dragon','Oeste de Quanti, fortaleza sobre um abismo; envolvida com o submundo.','Vampiros, Demônios, Anjos Caídos, Kitsunes e Magos Necromantes']];
+const _CLAS=['Vampiros','Lobisomens','Humanos','Elfos','Fadas','Zumbis','Androides','Goblins','Valquírias','Animalos','Anjos','Anjos Caídos','Demônios','Gigantes','Centauros','Tritões','Octópodes','Kitsunes','Dracônicos','Metamorfos','Monges','Glacinatas','Ectos','Minks'];
+const CLAD=[
+['Fada',5,10,5,20,60,100,10,'Voa a 60x. Maestria 40x com magia.'],
+['Fada Superior',20,20,20,40,80,120,20,'Voa a 80x. Maestria 50x com magia.'],
+['Vampiro',20,20,30,30,30,40,10,'Imortal; Ingestão de Sangue dá +20x força, +30x velocidade e +20x/+40x resistência (+10x por nível).'],
+['Vampiro Hemomance',70,70,50,50,30,60,10,'Perde fraquezas a fogo, água corrente e prata; só teme a luz.'],
+['Lobisomem Beta (humano)',20,20,20,10,10,10,5,'Forma lobo: força/velocidade 40x, resistência 40/20.'],
+['Lobisomem Alfa (humano)',40,40,40,20,10,10,10,'Forma lobo: força 80x, velocidade 70x, resistência 60/20.'],
+['Zumbi',30,30,30,30,10,10,30,'Cada órgão ingerido dá +10x em força, velocidade, resistência e cap. mágica. Maestria 10x.'],
+['Elfo da Luz',40,30,30,10,40,30,20,'Segundo bloco do PDF (avançado): força 60, vel. 50, res. 50/10, cap. 40, int. 50, maestria 50 (90 com espadas).'],
+['Elfo Negro',20,40,10,30,50,40,50,'Segundo bloco do PDF (avançado): força 40, vel. 60, res. 10/50, cap. 60, int. 60. Maestria 60x com armas à distância.'],
+['Mago',10,10,10,30,80,50,10,''],
+['Androide',10,10,10,10,10,40,10,'+80x para distribuir. Capacidade Reativa 40x. Mecha: força 100, resistência 80.'],
+['Goblin',10,10,20,60,25,60,20,'Orc: força 70, res. 80/60. Troll: força 50, vel. 60, res. 60/80, cap. 70, int. 60.'],
+['Valquíria',40,20,40,40,70,30,70,'Pégasus: força 50, vel. 90, res. 50/60, int. 10.'],
+['Anjo',30,30,10,10,50,30,40,'Voa a 50x; maestria 80x com armas divinas. Avançado: força 80, vel. 40 (80 voando), cap. 50.'],
+['Anjo Caído',30,30,10,10,50,60,40,'Voa a 50x; maestria 100x com armas divinas.'],
+['Demônio',30,30,10,10,50,60,20,'Imperador: força 80, vel. 40 (80 voando), cap. 80.'],
+['Gigante',100,10,80,30,40,20,10,'15 m de altura; maestria 40x com armas lendárias.'],
+['Centauro',50,60,20,20,40,30,30,'Maestria 70x com armas de longo alcance.'],
+['Humano',10,10,10,10,90,0,100,'Não manipula mana; usa a Gema Quantium e tecnologia.'],
+['Tritão / Sereia',30,30,70,10,60,30,40,'Maestria 60x com tridente; velocidade 60x na água. Leviatã: força 80, res. 100/40, cap. 60, int. 100.'],
+['Kitsune',20,30,10,10,60,50,40,''],
+['Dracônico (escamado)',40,10,40,50,30,30,10,'Verdadeira Forma Ancestral no nível 7: +70x em força, velocidade, resistências e cap. mágica por 8 turnos.'],
+['Dragão Negro',20,40,10,20,50,60,20,'Linhagem lendária dos dracônicos.'],
+['Metamorfo',20,50,50,10,60,0,60,'Pode virar objetos e outras formas.'],
+['Monge Pugilista',40,30,50,50,50,20,10,'Armeiro: força 20, vel. 40, res. 40/40, cap. 40, maestria 70.'],
+['Glacinata',40,20,40,30,70,50,70,'Resistência 70x contra frio; magias de gelo custam −10 de mana.'],
+['Ecto',20,20,40,10,30,40,10,'Velocidade 60x voando; resistência mágica 70x contra necromancia/sombras.'],
+['Mink',20,30,40,20,60,40,30,'Resistência mágica 100x e cap. 50x em raio.'],
+['Sentrie',10,10,10,10,80,80,10,'Simbionte; não tem olhos, ouvidos ou nariz.']];
+const CLAPEND=['Mutantes','Animalos','Octópodes'];
+const XP=[1000,2000,4000,8000,12000,20000,30000,40000,50000,100000];
+const MCUSTO=[20,30,40,50,60,70,80,90,100,110];
+const MISSOES=[['Pacífico','20–50 xp','500–800 tarjas'],['Fácil','70–100 xp','2.500–4.000'],['Média','120–150 xp','6.000–8.800'],['Arriscada','130–160 xp','8.000–11.000'],['Difícil','200–500 xp','20.000–50.000'],['Extrema','550–850 xp','55.000–85.000'],['Impossível','900–1.200 xp','90.000–120.000']];
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const V={
+inicio(){return `<h2>Bem-vindo a Menphis</h2><div class="card q">Um RPG onde o passado nunca realmente morre, onde os erros esquecidos moldam o futuro, e onde heróis e vilões se encontram presos em um ciclo interminável de redenção e destruição.</div>
+<div class="card"><h3>O mundo de Quanti</h3><p>Hades, uma máquina com consciência, provocou o Colapso Final. Erona, a Teia do Destino, reescreveu o mundo. Os Antigos derrotaram Hades em um domínio fora do tempo, mas a verdade virou mito e os clãs seguem divididos. Vestígios da tecnologia de Hades voltam a surgir.</p></div>
+<div class="grid">${ROUTES.slice(1).map(r=>`<div class="card"><h3>${r[1]}</h3><button class="btn" onclick="go('${r[0]}')">Abrir</button></div>`).join('')}</div>
+<div class="card"><h3>Regras de convivência</h3><ul><li>Respeito mútuo; sem discussões pessoais.</li><li>Poderes e projetos levam até 3 dias para avaliação.</li><li>Descreva só as ações do seu personagem.</li><li>As decisões do narrador são definitivas, mas dá para conversar.</li></ul></div>`},
+personagens(){const L=store.get('chars',[]);return `<h2>Personagens</h2>
+<div class="card"><h3>Nova ficha</h3><div class="row"><div><label>Nome</label><input id="n"></div><div><label>Idade</label><input id="i" type="number"></div><div><label>Clã</label><select id="c" onchange="fillClan()">${CLAD.map(c=>`<option>${c[0]}</option>`).join('')}</select></div><div><label>Casta (d20)</label><select id="k"><option value="0">Esquecida (1–5)</option><option value="75" selected>Comum (6–17)</option><option value="150">Real (18–20)</option></select></div></div>
+<div class="row"><div><label>Força (x)</label><input id="f" type="number" value="10"></div><div><label>Velocidade (x)</label><input id="v" type="number" value="10"></div><div><label>Resistência Física</label><input id="rf" type="number" value="10"></div><div><label>Resistência Mágica</label><input id="rm" type="number" value="10"></div><div><label>Inteligência</label><input id="it" type="number" value="10"></div><div><label>Cap. Mágica</label><input id="cm" type="number" value="10"></div><div><label>Maestria</label><input id="ma" type="number" value="10"></div></div>
+<label>Aparência / personalidade</label><textarea id="p" rows="2"></textarea><label>História (mínimo 80 palavras)</label><textarea id="h" rows="4"></textarea>
+<button class="btn" onclick="rollCasta()">Rolar casta</button><button class="btn" onclick="saveChar()">Salvar ficha</button><span id="msg" class="mut"></span></div>
+${L.map((c,i)=>`<div class="card"><h3>${esc(c.n)||'Sem nome'} <span class="tag">${esc(c.c)}</span><span class="tag">Nível ${c.lv}</span></h3><div class="mut">Mana ${c.mana} · EP ${c.ep} · XP ${c.xp}/${XP[c.lv-1]||'—'} · ${c.p?esc(c.p):''}</div>
+<div>${['f','v','rf','rm','it','cm','ma'].map((k,j)=>`<span class="tag">${['For','Vel','RF','RM','Int','CM','Mae'][j]} ${c[k]}x</span>`).join('')}</div>
+<div class="mut">${esc(c.h||'')}</div>
+<button class="btn" onclick="addXp(${i})">+50 XP</button><button class="btn" onclick="delChar(${i})">Excluir</button></div>`).join('')||'<p class="mut">Nenhum personagem ainda.</p>'}`},
+dados(){const L=store.get('chars',[]);return `<h2>Rolar Dados</h2><div class="card"><label>Personagem</label><select id="dc"><option value="">— sem ficha —</option>${L.map((c,i)=>`<option value="${i}">${esc(c.n)}</option>`).join('')}</select>
+<label>Atributo (bônus = valor ÷ 10)</label><select id="da"><option value="0">Nenhum</option><option value="f">Força</option><option value="v">Velocidade</option><option value="rf">Resistência Física</option><option value="rm">Resistência Mágica</option><option value="it">Inteligência</option><option value="cm">Cap. Mágica</option><option value="ma">Maestria</option></select>
+<label>Bônus extra</label><input id="dx" type="number" value="0"><button class="btn" onclick="roll(20)">d20</button><button class="btn" onclick="roll(100)">d100</button><button class="btn" onclick="roll(10)">d10</button><button class="btn" onclick="roll(6)">d6</button><div class="big" id="res">—</div></div><div class="card"><h3>Histórico</h3><div id="log">${(store.get('log',[])).map(x=>`<div>${esc(x)}</div>`).join('')}</div></div>`},
+cla(){return `<h2>Clãs</h2><p class="mut">Atributos base lidos do PDF de Clãs. Habilidades, fraquezas e evoluções de cada clã estão no PDF.</p><div class="grid">${CLAD.map(c=>`<div class="card"><h3>${c[0]}</h3><div><span class="tag">For ${c[1]}x</span><span class="tag">Vel ${c[2]}x</span><span class="tag">RF ${c[3]}x</span><span class="tag">RM ${c[4]}x</span><span class="tag">Int ${c[5]}x</span><span class="tag">CM ${c[6]}x</span><span class="tag">Mae ${c[7]}x</span></div><p class="mut">${c[8]}</p></div>`).join('')}</div><div class="card"><h3>Ainda sem atributos aqui</h3><p>${CLAPEND.join(', ')} (conferir no PDF).</p></div><div class="card"><h3>Gema Quantium (Humanos)</h3><p>Resistência 150x. Serve de bateria, de fonte para runas neutras ou combinada com runas elementais e ingredientes mágicos.</p></div>`},
+contratos(){return `<h2>Contratos</h2><p class="mut">Capacidade base nível 5; só a partir do nível 2 de personagem.</p>`+Object.entries(CONTRATOS).map(([k,v])=>`<div class="card"><h3>${k}</h3><p>${v.d}</p>${v.l.map(x=>`<details><summary>${x[0]}</summary><p><b>Poderes e benefícios:</b> ${x[1]}</p><p><b>Punição:</b> ${x[2]}</p></details>`).join('')}</div>`).join('')},
+habilidades(){return `<h2>Habilidades Extras</h2>`+HAB.map(h=>`<div class="card"><h3>${h[0]}</h3><p class="mut">${h[1]}</p><p>${h[2]}</p></div>`).join('')},
+regras(){return `<h2>Regras</h2><div class="card"><h3>Progressão</h3><div class="scroll"><table><tr><th>Nível</th><th>XP total</th><th>Custo base de magia (patamar 1)</th></tr>${XP.map((x,i)=>`<tr><td>${i+1}</td><td>${x.toLocaleString('pt-BR')}</td><td>${MCUSTO[i]}</td></tr>`).join('')}</table></div><p class="mut">Cada patamar custa +5 de mana. Controle de mana: Básico (I–III), Mediano (IV–VI), Avançado (VII–IX), Supremo (X).</p></div>
+<div class="card"><h3>Mana</h3><p>150 base + casta (Comum +75, Real +150) + 25 por 10x de Capacidade Mágica. Mana zerada: perde metade de força e velocidade.</p></div>
+<div class="card"><h3>EP (Pontos Espirituais)</h3><p>Começa com 100 + 25 por 10x de resistência (física + mágica) e ganha 100 por patamar. Em 20% do total os atributos físicos caem pela metade; em 0 há nocaute; morte no negativo igual ao máximo.</p></div>
+<div class="card"><h3>Missões</h3><div class="scroll"><table><tr><th>Dificuldade</th><th>XP</th><th>Tarjas</th></tr>${MISSOES.map(m=>`<tr>${m.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div></div>
+<div class="card"><h3>Treino</h3><p>Poderes: cena de 160 palavras no nível 1, +80 por rank. Atributos: treino regular dá +10x por 160 palavras; intenso dá +5x por 320. INT, MA e CM só sobem por XP (500 XP = +10x).</p></div>`},
+guildas(){return `<h2>Guildas</h2>`+GUILDAS.map(g=>`<div class="card"><h3>${g[0]}</h3><p>${g[1]}</p><p class="mut">Membros: ${g[2]}</p></div>`).join('')+`<p class="mut">Membro oficial exige nível 3; qualquer player pode pegar missões.</p>`},
+ferramentas(){return `<h2>Ferramentas</h2>
+<div class="card"><h3>Calculadora de mana e EP</h3><div class="row"><input id="t1" type="number" placeholder="Casta: 0, 75 ou 150"><input id="t2" type="number" placeholder="Cap. Mágica (x)"><input id="t3" type="number" placeholder="Resist. total (x)"><input id="t4" type="number" placeholder="Patamares"></div><button class="btn" onclick="calcMP()">Calcular</button><div id="o1"></div></div>
+<div class="card"><h3>Dano físico (EP)</h3><div class="row"><input id="d1" type="number" placeholder="Força (x)"><input id="d2" type="number" placeholder="Velocidade usada (x)"><input id="d3" type="number" placeholder="Resist. do atacante (x)"></div><button class="btn" onclick="calcDano()">Calcular</button><div id="o2"></div></div>
+<div class="card"><h3>Iniciativa</h3><textarea id="ini" rows="3" placeholder="Um nome por linha"></textarea><button class="btn" onclick="initiative()">Rolar iniciativa</button><div id="o3"></div></div>
+<div class="card"><h3>Cronometragem</h3><div class="big" id="cr">10</div><button class="btn" onclick="cron(10)">Longe 10</button><button class="btn" onclick="cron(7)">Perto 7</button><button class="btn" onclick="cron(8)">Longe sem magia 8</button><button class="btn" onclick="cron(6)">Perto sem magia 6</button></div>`},
+notas(){const N=store.get('notes',{});return `<h2>Notas</h2>`+['Personagem','Quests','Segredos','Mapa','Aliados','Inimigos'].map(k=>`<div class="card"><h3>${k}</h3><textarea rows="3" oninput="saveNote('${k}',this.value)">${esc(N[k]||'')}</textarea></div>`).join('')}
+};
+function render(){const r=(location.hash||'#inicio').slice(1);const k=V[r]?r:'inicio';$('#app').innerHTML=V[k]();$('#nav').innerHTML=ROUTES.map(x=>`<button class="${x[0]===k?'on':''}" onclick="go('${x[0]}')">${x[1]}</button>`).join('');window.scrollTo(0,0)}
+function go(r){location.hash=r}
+window.addEventListener('hashchange',render);
+const num=id=>+($('#'+id).value)||0;
+function fillClan(){const c=CLAD.find(x=>x[0]===$('#c').value);if(!c)return;['f','v','rf','rm','it','cm','ma'].forEach((k,j)=>$('#'+k).value=c[j+1])}
+function rollCasta(){const d=Math.ceil(Math.random()*20);$('#k').value=d<=5?0:d<=17?75:150;$('#msg').textContent=' d20 = '+d+(d<=5?' (Esquecida)':d<=17?' (Comum)':' (Real)')}
+function saveChar(){const c={n:$('#n').value,i:$('#i').value,c:$('#c').value,p:$('#p').value,h:$('#h').value,k:num('k'),lv:1,xp:0};['f','v','rf','rm','it','cm','ma'].forEach(k=>c[k]=num(k));
+c.mana=150+c.k+Math.floor(c.cm/10)*25;c.ep=100+Math.floor((c.rf+c.rm)/10)*25;
+const w=c.h.trim().split(/\s+/).filter(Boolean).length;if(w<80){$('#msg').textContent=' A história precisa de 80 palavras ('+w+' agora).';return}
+const L=store.get('chars',[]);L.push(c);store.set('chars',L);render()}
+function addXp(i){const L=store.get('chars',[]);const c=L[i];c.xp+=50;while(c.lv<10&&c.xp>=XP[c.lv-1]){c.xp-=XP[c.lv-1];c.lv++}store.set('chars',L);render()}
+function delChar(i){const L=store.get('chars',[]);L.splice(i,1);store.set('chars',L);render()}
+function roll(s){const d=Math.ceil(Math.random()*s);let b=0,nome='';const ci=$('#dc').value,a=$('#da').value;if(ci!==''&&a!=='0'){const c=store.get('chars',[])[ci];b+=Math.floor((c[a]||0)/10);nome=c.n+' '}b+=num('dx');
+const t=d+b;$('#res').textContent=`${t}  (d${s}: ${d}${b?' + '+b:''})`;const L=store.get('log',[]);L.unshift(`${nome}d${s}: ${d}${b?' + '+b:''} = ${t}`);store.set('log',L.slice(0,30));$('#log').innerHTML=L.slice(0,30).map(x=>`<div>${esc(x)}</div>`).join('')}
+function calcMP(){const m=150+num('t1')+Math.floor(num('t2')/10)*25;const e=100+Math.floor(num('t3')/10)*25+100*num('t4');$('#o1').innerHTML=`<p>Mana: <b>${m}</b> · EP: <b>${e}</b></p>`}
+function calcDano(){const f=num('d1'),v=num('d2'),r=num('d3');const dano=(Math.floor(f/10)+Math.floor(v/10))*5;const gap=f-r;const ret=gap<=20?0:gap<=50?0.5:1;$('#o2').innerHTML=`<p>Dano no alvo: <b>−${dano} EP</b> · Retorno em você: <b>−${dano*ret} EP</b></p>`}
+function initiative(){const n=$('#ini').value.split('\n').map(s=>s.trim()).filter(Boolean).map(s=>[s,Math.ceil(Math.random()*20)]).sort((a,b)=>b[1]-a[1]);$('#o3').innerHTML=n.map((x,i)=>`<div>${i+1}. ${esc(x[0])} — ${x[1]}</div>`).join('')}
+let tm;function cron(n){clearInterval(tm);const el=$('#cr');el.textContent=n;tm=setInterval(()=>{n--;el.textContent=n;if(n<=0)clearInterval(tm)},1000)}
+function saveNote(k,v){const N=store.get('notes',{});N[k]=v;store.set('notes',N)}
+/* ===== v2: runtime, login, páginas ===== */
+const ROUTES2=[['inicio','Início','🏰'],['personagens','Personagens','🧙'],['dados','Dados','🎲'],['cla','Clãs','🧬'],['missoes','Sessões','📜'],['mesa','Mesa','🗺️'],['mapa','Mapa','🌍'],['regioes','Regiões','⛰️'],['guilda','Chat','💬'],['loja','Loja','🛒'],['armaria','Armaria','⚔️'],['mguilda','Missões','📌'],['contratos','Contratos','🩸'],['habilidades','Poderes','✨'],['regras','Regras','📖'],['guildas','Guildas','🏯'],['ferramentas','Ferramentas','🛠️'],['notas','Notas','📝'],['jogos','Jogos','🎮'],['usuarios','Usuários','👑']];
+let U=null,DB=null,AI=null,ME=null,CHARS=[],unsubs=[],ON={},TOK=[],SEL=null,ROOM='Geral';
+const rid=()=>Math.random().toString(36).slice(2,10);
+const routes=()=>ROUTES2.filter(r=>r[0]!=='usuarios'||isAdm());
+const isAdm=()=>ME&&ME.role==='Admin',isMod=()=>ME&&(ME.role==='Admin'||ME.role==='Moderador');
+const LOC={ls:{},get:c=>store.get('c_'+c,[]),put(c,a){store.set('c_'+c,a);(LOC.ls[c]||[]).forEach(f=>f(a))}};
+function sub(col,cb,n=300,keep){let u;
+ if(DB){try{u=DB.collection(col).orderBy('t','asc').limit(n).onSnapshot(s=>cb(s.docs.map(d=>({id:d.id,...d.data()}))),()=>cb([]))}catch(e){}}
+ if(!u){(LOC.ls[col]=LOC.ls[col]||[]).push(cb);cb(LOC.get(col));u=()=>{LOC.ls[col]=LOC.ls[col].filter(f=>f!==cb)}}
+ if(!keep)unsubs.push(u);return u}
+async function add(col,o){o.t=Date.now();if(DB){try{return (await DB.collection(col).add(o)).id}catch(e){toast('Sem permissão para gravar.');return}}o.id=rid();LOC.put(col,[...LOC.get(col),o]);return o.id}
+async function upd(col,id,p){if(DB){try{await DB.collection(col).doc(id).update(p)}catch(e){toast('Sem permissão.')}return}LOC.put(col,LOC.get(col).map(x=>x.id===id?{...x,...p}:x))}
+async function del(col,id){if(DB){try{await DB.collection(col).doc(id).delete()}catch(e){toast('Sem permissão.')}return}LOC.put(col,LOC.get(col).filter(x=>x.id!==id))}
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2600)}
+async function initRuntime(){if(!window.claude){$('#gs').textContent='Servidor indisponível aqui: use o modo convidado.';return}
+ try{U=await claude.use('user')}catch(e){}try{DB=await claude.use('db')}catch(e){}try{AI=await claude.use('sample')}catch(e){}
+ $('#gc').disabled=!U;$('#gs').textContent=U?'Servidor conectado: contas, chat e mesa compartilhados.':'Servidor indisponível: use o modo convidado.';
+ if(U&&store.get('mode',0)==='claude'&&!ME)loginClaude()}
+async function loginClaude(){try{const id=await U.id();let nm='Caçador';try{const m=await U.me();nm=(m&&m.name)||nm}catch(e){}
+ let role=U.isOwner()?'Admin':U.canEdit()?'Moderador':'Player',ov=null;
+ if(DB){try{const sn=await DB.collection('profiles').doc(id).get();if(sn.exists)ov=sn.data().roleOverride||null;if(ov&&role==='Player')role=ov;await DB.collection('profiles').doc(id).set({name:nm,role,roleOverride:ov,t:Date.now()})}catch(e){}}
+ ME={id,name:nm,role};store.set('mode','claude');enter()}catch(e){toast('Falha no login.')}}
+function loginGuest(){const n=$('#gn').value.trim();if(!n){toast('Digite um nome.');return}let g=store.get('guest',null);if(!g||g.name!==n)g={id:rid(),name:n};store.set('guest',g);store.set('mode','guest');ME={id:'g_'+g.id,name:n,role:'Player',guest:1};enter()}
+function logout(){store.set('mode',0);location.hash='';location.reload()}
+function enter(){$('#gate').style.display='none';$('#me').innerHTML=`<b>${esc(ME.name)}</b><br>${ME.role} · <a href="#" onclick="logout();return false" style="color:var(--ac)">sair</a>`;sub('chars',a=>{CHARS=a;ON.chars&&ON.chars()},300,true);radial();render()}
+function radT(o){$('#rad').classList.toggle('on',!!o)}
+function radial(){const R=routes(),w=Math.min(innerWidth,innerHeight),r1=Math.min(115,w/2-60),r2=Math.min(205,w/2-45),a=R.slice(0,8),b=R.slice(8);
+ const pos=(x,i,n,r)=>{const t=2*Math.PI*i/n-Math.PI/2;return `<button class="ri" style="left:calc(50% + ${Math.cos(t)*r}px);top:calc(50% + ${Math.sin(t)*r}px)" onclick="go('${x[0]}');radT(0)"><span>${x[2]}</span><small>${x[1]}</small></button>`};
+ $('#radi').innerHTML=a.map((x,i)=>pos(x,i,a.length,r1)).join('')+b.map((x,i)=>pos(x,i,b.length,r2)).join('')}
+function render(){unsubs.forEach(f=>{try{f()}catch(e){}});unsubs=[];ON={};if(!ME)return;
+ let r=(location.hash||'#inicio').slice(1);if(!V[r]||(r==='usuarios'&&!isAdm()))r='inicio';
+ $('#app').innerHTML=V[r]();$('#nav').innerHTML=routes().map(x=>`<button class="${x[0]===r?'on':''}" onclick="go('${x[0]}')">${x[2]} ${x[1]}</button>`).join('');
+ if(V[r+'_init'])V[r+'_init']();window.scrollTo(0,0)}
+const T=(t)=>`<h2>${t}</h2><div class="div">❖ ✦ ❖</div>`;
+const myChars=()=>CHARS.filter(c=>c.owner===ME.id);
+const lvPct=c=>Math.min(100,Math.round(100*c.xp/(XP[c.lv-1]||1)));
+const HERO=`<div class="hero"><svg viewBox="0 0 800 250"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d0a24"/><stop offset=".6" stop-color="#5b2d1c"/><stop offset="1" stop-color="#d79b32"/></linearGradient></defs><rect width="800" height="250" fill="url(#sk)"/><circle cx="640" cy="70" r="34" fill="#f6e7b4"/><circle cx="652" cy="64" r="30" fill="#2a1a2a" opacity=".35"/>${Array.from({length:30},(_,i)=>`<circle cx="${(i*83)%790+8}" cy="${(i*47)%120+8}" r="${i%3?1:1.8}" fill="#fff" opacity=".8"/>`).join('')}<path d="M0 190L90 120 170 180 260 100 360 185 450 130 560 190 680 115 800 185V250H0Z" fill="#1a1020"/><g fill="#0b0712"><rect x="300" y="110" width="200" height="110"/><rect x="285" y="80" width="34" height="140"/><rect x="480" y="80" width="34" height="140"/><rect x="370" y="60" width="60" height="160"/><path d="M285 80l17-35 17 35zM480 80l17-35 17 35zM370 60l30-50 30 50z"/></g><g fill="#f5d98a"><rect x="392" y="100" width="6" height="12"/><rect x="402" y="130" width="6" height="12"/><rect x="298" y="110" width="5" height="10"/><rect x="496" y="110" width="5" height="10"/></g><rect y="215" width="800" height="35" fill="#0b0712"/><circle cx="120" cy="125" r="44" fill="none" stroke="#f5d98a" stroke-width="7" stroke-dasharray="220 56"/><path d="M158 102q16-9 12 6-6 7-13 3z" fill="#f5d98a"/></svg></div>`;
+Object.assign(V,{
+inicio(){return HERO+T('Bem-vindo, '+esc(ME.name))+`<div class="card q">Menphis: onde o passado nunca realmente morre, e os erros esquecidos moldam o futuro. As ruínas de Hades aguardam.</div><div class="grid"><div class="card"><h3>Meus personagens</h3><div id="mine"></div></div><div class="card"><h3>Ranking global</h3><div id="rk"></div></div></div><div class="card"><h3>Notícias</h3><div id="nw"></div>${isMod()?`<input id="nt" placeholder="Nova notícia"><button class="btn" onclick="addNews()">Publicar</button>`:''}</div>`},
+inicio_init(){ON.chars=()=>{if(!$('#mine'))return;$('#mine').innerHTML=myChars().map(c=>`<div><b>${esc(c.n)}</b> <span class="tag">${esc(c.c)}</span> Nv ${c.lv}<div class="bar"><i style="width:${lvPct(c)}%"></i></div></div>`).join('')||'<p class="mut">Crie um personagem na aba Personagens.</p>';
+ $('#rk').innerHTML=[...CHARS].sort((a,b)=>b.lv*1e6+b.xp-a.lv*1e6-a.xp).slice(0,5).map((c,i)=>`<div>${i+1}. <b>${esc(c.n)}</b> · ${esc(c.c)} · Nv ${c.lv}</div>`).join('')||'<p class="mut">Sem personagens ainda.</p>'};ON.chars();
+ sub('news',a=>{if($('#nw'))$('#nw').innerHTML=[...a].reverse().slice(0,8).map(n=>`<div class="post">${esc(n.text)} <span class="mut">· ${esc(n.by)}</span>${isMod()?` <button class="btn s" onclick="del('news','${n.id}')">x</button>`:''}</div>`).join('')||'<p class="mut">Nenhuma notícia.</p>'})},
+personagens(){return T('Personagens')+`<div class="card"><h3>Nova ficha</h3><div class="row"><div><label>Nome</label><input id="n"></div><div><label>Idade</label><input id="i" type="number"></div><div><label>Clã (define os atributos base)</label><select id="c" onchange="fillClan()">${CLAD.map(c=>`<option>${c[0]}</option>`).join('')}</select></div><div><label>Casta</label><select id="k"><option value="0">Esquecida (1–5)</option><option value="75" selected>Comum (6–17)</option><option value="150">Real (18–20)</option></select></div></div>
+<div class="row">${[['f','Força'],['v','Velocidade'],['rf','Resist. Física'],['rm','Resist. Mágica'],['it','Inteligência'],['cm','Cap. Mágica'],['ma','Maestria']].map(a=>`<div><label>${a[1]} (x)</label><input id="${a[0]}" type="number" readonly></div>`).join('')}</div><p class="mut" id="cn"></p>
+<label>Aparência e personalidade</label><textarea id="p" rows="2"></textarea><label>História (mínimo 80 palavras)</label><textarea id="h" rows="4"></textarea>
+<button class="btn" onclick="rollCasta()">Rolar casta (d20)</button><button class="btn" onclick="saveChar()">Salvar ficha</button><span id="msg" class="mut"></span></div><div id="cl"></div>`},
+personagens_init(){fillClan();ON.chars=()=>{if(!$('#cl'))return;$('#cl').innerHTML=myChars().map(c=>`<div class="card"><h3>${esc(c.n)||'Sem nome'} <span class="tag">${esc(c.c)}</span><span class="tag">Nível ${c.lv}</span></h3><div class="bar"><i style="width:${lvPct(c)}%"></i></div><div class="mut">Mana ${c.mana} · EP ${c.ep} · XP ${c.xp}/${XP[c.lv-1]||'máx'} · Tarjas ${c.tarjas||0}</div><div>${['f','v','rf','rm','it','cm','ma'].map((k,j)=>`<span class="tag">${['For','Vel','RF','RM','Int','CM','Mae'][j]} ${c[k]}x</span>`).join('')}</div><p class="mut">${esc(c.p||'')}</p><div><b>Inventário:</b> ${(c.inv||[]).map((x,j)=>`<span class="tag" onclick="rmItem('${c.id}',${j})" title="remover">${esc(x.n)} ×${x.q}</span>`).join('')||'<span class="mut">vazio</span>'}</div>
+<button class="btn s" onclick="addItem('${c.id}')">+ item</button>${(isMod()||!DB)?`<button class="btn s" onclick="xp50('${c.id}')">+50 XP</button>`:''}<button class="btn s" onclick="delChar('${c.id}')">Excluir</button></div>`).join('')};ON.chars()},
+dados(){return T('Rolar Dados')+`<div class="card"><label>Personagem</label><select id="dc"><option value="">— sem ficha —</option>${myChars().map(c=>`<option value="${c.id}">${esc(c.n)}</option>`).join('')}</select><label>Atributo (bônus = valor ÷ 10)</label><select id="da"><option value="0">Nenhum</option><option value="f">Força</option><option value="v">Velocidade</option><option value="rf">Resistência Física</option><option value="rm">Resistência Mágica</option><option value="it">Inteligência</option><option value="cm">Cap. Mágica</option><option value="ma">Maestria</option></select><label>Bônus extra</label><input id="dx" type="number" value="0"><button class="btn" onclick="roll(20)">d20</button><button class="btn" onclick="roll(100)">d100</button><button class="btn" onclick="roll(10)">d10</button><button class="btn" onclick="roll(6)">d6</button><div class="big" id="res">—</div></div><div class="card"><h3>Histórico</h3><div id="log">${(store.get('log',[])).map(x=>`<div>${esc(x)}</div>`).join('')}</div></div>`},
+missoes(){return T('Sessões Narrativas')+`<div class="card"><div id="feed"></div></div><div class="card"><label>Personagem</label><select id="pc"><option value="">Narrador / sem personagem</option>${myChars().map(c=>`<option>${esc(c.n)}</option>`).join('')}</select><label>Sua ação ou narração</label><textarea id="pt" rows="3"></textarea><button class="btn" onclick="post()">Postar</button>${isMod()?`<button class="btn" onclick="nextTurn()">Passar turno ⏳</button>`:''}</div>`},
+missoes_init(){sub('posts',a=>{const f=$('#feed');if(!f)return;f.innerHTML=a.slice(-60).map(p=>`<div class="post">${p.kind==='turn'?`<b>⏳ ${esc(p.text)}</b>`:`<b>${esc(p.char||p.by)}</b> <span class="mut">(${esc(p.by)})</span><br>${esc(p.text)}`}${isMod()?` <button class="btn s" onclick="del('posts','${p.id}')">x</button>`:''}</div>`).join('')||'<p class="mut">A história ainda não começou.</p>';f.scrollTop=1e9;window.PT=a.filter(p=>p.kind==='turn').length})},
+mesa(){return T('Mesa Virtual')+`<div class="card"><div class="row"><input id="tn" placeholder="Nome do token"><input id="th" type="number" value="100" placeholder="HP"><input id="tc" type="color" value="#c9a227"></div><button class="btn" onclick="addTok()">Adicionar token</button><button class="btn" onclick="rollInit()">Rolar iniciativa</button><label><input type="checkbox" id="fg" onchange="drawMesa()" style="width:auto"> Névoa de guerra (alcance 3 casas)</label></div><div id="grid" class="mgrid"></div><div class="card" id="tl"></div>`},
+mesa_init(){SEL=null;sub('tokens',a=>{TOK=a;drawMesa()})},
+mapa(){const P=[['Águia Imperial',300,50,'Norte: cidade-guilda de mármore e tecnologia. Humanos, Magos, Trolls, Gigantes, Fadas e Anjos.'],['Luar Crescente',300,370,'Sul, praia de Zero Quadrant: jardins bioluminescentes, fonte curativa.'],['Leões Carmesim',520,210,'Leste: castelo de pedra vermelha entre colinas verdejantes.'],['Black Dragon',90,210,'Oeste: fortaleza sobre um abismo, neblina e lava. Submundo.'],['Glera',560,60,'Ilha gélida do Novo Mundo, lar dos Glacinatas.'],['Ilyan',60,70,'Ilha celestial sustentada por nuvens, lar dos Minks.'],['Atlântida',120,350,'Reino dos Tritões, Sereias e Octópodes; 13 cidades no fundo dos mares.']];window.MP=P;
+ return T('Mapa de Quanti')+`<div class="card"><svg viewBox="0 0 620 420" style="width:100%"><defs><radialGradient id="o"><stop offset="0" stop-color="#2a4a5a"/><stop offset="1" stop-color="#0d1c26"/></radialGradient></defs><rect width="620" height="420" fill="url(#o)" rx="10"/><path d="M200 40Q380 10 470 90T520 270Q460 380 320 395T130 300Q100 160 200 40Z" fill="#6b5a2c" stroke="#f5d98a" stroke-width="3"/><circle cx="310" cy="210" r="22" fill="none" stroke="#f5d98a" stroke-dasharray="4 3"/><text x="310" y="214" fill="#f5d98a" font-size="10" text-anchor="middle">Núcleo</text>${P.map((p,i)=>`<g style="cursor:pointer" onclick="mapInfo(${i})"><circle cx="${p[1]}" cy="${p[2]}" r="13" fill="#f5d98a" stroke="#1b1202" stroke-width="3"/><text x="${p[1]}" y="${p[2]+28}" fill="#fff" font-size="12" text-anchor="middle" style="paint-order:stroke" stroke="#000" stroke-width="3">${p[0]}</text></g>`).join('')}</svg><div id="mi" class="mut">Toque em um local do mapa.</div></div>`},
+regioes(){return T('Regiões')+`<div class="grid">${[['Zero Quadrant','Praia encantada','Sul: sede da Luar Crescente.'],['Glera','Gélido','Ilha do Novo Mundo; gelo constante.'],['Ilyan','Celestial','Ilha flutuante dos Minks.'],['Atlântida','Oceânico','13 cidades sob o mar.'],['Plano dos Sonhos','Onírico','Origem das Maldições e pesadelos.'],['Domínio de Hades','Selvagem','Zona fora do tempo e do espaço.']].map(r=>`<div class="card"><h3>${r[0]}</h3><span class="tag">${r[1]}</span><p>${r[2]}</p></div>`).join('')}</div><div class="card"><h3>Eventos ativos</h3><div id="ev"></div>${isMod()?`<div class="row"><select id="et"><option>perigo</option><option>oportunidade</option><option>neutro</option></select><input id="ex" placeholder="Evento"></div><button class="btn" onclick="addEv()">Adicionar evento</button>`:''}</div>`},
+regioes_init(){sub('events',a=>{if($('#ev'))$('#ev').innerHTML=a.map(e=>`<div class="post"><span class="tag">${esc(e.tipo)}</span> ${esc(e.text)}${isMod()?` <button class="btn s" onclick="del('events','${e.id}')">x</button>`:''}</div>`).join('')||'<p class="mut">Nenhum evento.</p>'})},
+guilda(){return T('Chat das Guildas')+`<div class="card"><div id="rm">${['Geral',...GUILDAS.map(g=>g[0])].map(r=>`<button class="btn s" onclick="ROOM='${r}';drawChat()">${r}</button>`).join('')}</div></div><div class="card"><div class="chat" id="ch"></div><select id="cp"><option value="">${esc(ME.name)}</option>${myChars().map(c=>`<option>${esc(c.n)}</option>`).join('')}</select><input id="cx" placeholder="Mensagem" onkeydown="if(event.key==='Enter')sendChat()"><button class="btn" onclick="sendChat()">Enviar</button></div>`},
+guilda_init(){window.CM=[];sub('chat',a=>{CM=a;drawChat()})},
+loja(){return T('Loja de Kion')+`<div class="card"><label>Comprar com o personagem</label><select id="lc">${myChars().map(c=>`<option value="${c.id}">${esc(c.n)} (${c.tarjas||0} tarjas)</option>`).join('')||'<option value="">Crie um personagem</option>'}</select><p class="mut">Preços sugeridos: ajuste com a administração.</p></div><div id="ls" class="grid"></div>${isMod()?`<div class="card"><h3>Novo item</h3><div class="row"><input id="sn" placeholder="Nome"><input id="sp" type="number" placeholder="Preço"><input id="sk2" placeholder="Categoria"></div><button class="btn" onclick="addShop()">Adicionar</button></div>`:''}`},
+loja_init(){sub('shop',a=>{if(!$('#ls'))return;const L=[...SHOP,...a];$('#ls').innerHTML=L.map(x=>`<div class="card"><h3>${esc(x.n)}</h3><span class="tag">${esc(x.k)}</span><p class="big" style="font-size:20px">${x.p} tarjas</p><button class="btn s" onclick="buy('${esc(x.n)}',${x.p})">Comprar</button>${x.id&&isMod()?`<button class="btn s" onclick="del('shop','${x.id}')">x</button>`:''}</div>`).join('')});ON.chars=()=>{const s=$('#lc');if(s){const v=s.value;s.innerHTML=myChars().map(c=>`<option value="${c.id}">${esc(c.n)} (${c.tarjas||0} tarjas)</option>`).join('');s.value=v}}},
+armaria(){return T('Armaria')+`<div class="card"><select id="ar" onchange="drawArm()"><option value="">Todas as raridades</option>${['artefato','superior','épico','lendário','único','herança'].map(r=>`<option>${r}</option>`).join('')}</select></div><div id="al" class="grid"></div>${isMod()?`<div class="card"><h3>Novo equipamento</h3><div class="row"><input id="an" placeholder="Nome"><select id="ak">${['artefato','superior','épico','lendário','único','herança'].map(r=>`<option>${r}</option>`).join('')}</select></div><textarea id="ad" rows="2" placeholder="Descrição"></textarea><button class="btn" onclick="addArm()">Adicionar</button></div>`:''}`},
+armaria_init(){window.AR=[];sub('armory',a=>{AR=a;drawArm()})},
+mguilda(){return T('Missões de Guilda')+`<div class="card"><label>Guilda</label><select id="mg" onchange="drawMG()">${GUILDAS.map(g=>`<option>${g[0]}</option>`).join('')}</select><label>Dificuldade</label><select id="md" onchange="drawMG()">${MD.map((m,i)=>`<option value="${i}">${m[0]}</option>`).join('')}</select><label>Personagem</label><select id="mc">${myChars().map(c=>`<option value="${c.id}">${esc(c.n)}</option>`).join('')||'<option value="">Crie um personagem</option>'}</select></div><div id="mb" class="grid"></div><div class="card"><h3>Minhas missões</h3><div id="mq"></div></div>`},
+mguilda_init(){drawMG();sub('mq',a=>{if(!$('#mq'))return;$('#mq').innerHTML=a.filter(q=>q.owner===ME.id||isMod()).map(q=>`<div class="post"><b>${esc(q.label)}</b> <span class="tag">${q.status}</span> ${q.xp} xp · ${q.tj} tarjas <span class="mut">(${esc(q.by)})</span>${q.status==='ativa'&&q.owner===ME.id?`<button class="btn s" onclick="upd('mq','${q.id}',{status:'validar'})">Pedir validação</button>`:''}${q.status==='validar'&&isMod()?`<button class="btn s" onclick="approveQ('${q.id}')">Aprovar</button>`:''}</div>`).join('')||'<p class="mut">Nenhuma missão aceita.</p>'})},
+jogos(){return T('Jogos')+`<div class="grid"><div class="card"><h3>Memória</h3><div class="mem" id="mm"></div><p id="mmsg" class="mut"></p><button class="btn" onclick="memStart()">Novo jogo</button></div><div class="card"><h3>Reflexo</h3><button class="btn" id="rb" style="width:100%;padding:30px" onclick="reflex()">Começar</button><p id="rmsg" class="mut">Melhor: ${store.get('bestR','—')} ms</p></div><div class="card"><h3>Duelo Mental</h3><p class="mut">Água vence Fogo, Fogo vence Vento, Vento vence Terra, Terra vence Água.</p>${['Água','Fogo','Vento','Terra'].map(e=>`<button class="btn s" onclick="duel('${e}')">${e}</button>`).join('')}<p id="dmsg"></p></div></div>`},
+jogos_init(){memStart()},
+usuarios(){return T('Usuários')+`<div class="card"><div id="us"></div><p class="mut">O papel Admin vem do dono do artefato; aqui você promove Moderadores.</p></div>`},
+usuarios_init(){sub('profiles',a=>{if($('#us'))$('#us').innerHTML=a.map(u=>`<div class="post"><b>${esc(u.name)}</b> <span class="tag">${esc(u.role)}</span><select onchange="upd('profiles','${u.id}',{roleOverride:this.value})"><option>Player</option><option ${u.roleOverride==='Moderador'?'selected':''}>Moderador</option></select></div>`).join('')||'<p class="mut">Sem usuários registrados.</p>'})}
+});
+const _ft=V.ferramentas;V.ferramentas=()=>_ft()+`<div class="card"><h3>Geradores${AI?' (IA)':''}</h3><select id="gk"><option value="nome">Nome</option><option value="loot">Loot</option><option value="npc">NPC</option><option value="plot">Plot twist</option><option value="clima">Clima</option></select><button class="btn" onclick="gen()">Gerar</button><div id="go" class="post"></div></div>`;
+const SHOP=[['Ração de viagem','Alimentos',20],['Manto de viajante','Roupas',150],['Estalagem (1 noite)','Moradia',80],['Ferrus (1 kg)','Materiais',120],['Madeira (1 kg)','Materiais',40],['Poção de mana','Especiais',300]].map(a=>({n:a[0],k:a[1],p:a[2]}));
+const RN=['Alvarenga','Kael','Mirelle','Thorn','Ysolde','Draven','Selene','Orik'],RL=['Gema Quantium bruta','Pergaminho rúnico','Poção de cura','Fragmento de máscara','Amuleto antigo'],RP=['Um aliado revela ser agente de Hades.','O mapa estava invertido.','A relíquia responde a outro nome.','O vilarejo nunca existiu.'],RC=['Névoa mágica densa','Tempestade de mana','Céu limpo e frio','Chuva ácida leve'];
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+async function gen(){const k=$('#gk').value,o=$('#go');o.textContent='…';
+ if(AI){try{const r=await AI(`Você é narrador do RPG Menphis (mundo de Quanti, magia e mana, clãs, guildas). Gere em português, curto (máx. 4 linhas): ${{nome:'3 nomes de personagens',loot:'um loot interessante',npc:'um NPC com aparência, personalidade e segredo',plot:'um plot twist',clima:'o clima mágico da região atual'}[k]}.`);o.textContent=r.text;return}catch(e){}}
+ o.textContent={nome:pick(RN)+' '+pick(RN),loot:pick(RL),npc:pick(RN)+': '+pick(['desconfiado','alegre','sombrio'])+', guarda um segredo.',plot:pick(RP),clima:pick(RC)}[k]}
+function fillClan(){const c=CLAD.find(x=>x[0]===$('#c').value);if(!c)return;['f','v','rf','rm','it','cm','ma'].forEach((k,j)=>$('#'+k).value=c[j+1]);$('#cn').textContent=c[8]||''}
+function rollCasta(){const d=Math.ceil(Math.random()*20);$('#k').value=d<=5?0:d<=17?75:150;$('#msg').textContent=' d20 = '+d}
+async function saveChar(){const c={owner:ME.id,by:ME.name,n:$('#n').value.trim(),i:$('#i').value,c:$('#c').value,p:$('#p').value,h:$('#h').value,k:num('k'),lv:1,xp:0,inv:[]};
+ if(!c.n){$('#msg').textContent=' Dê um nome.';return}['f','v','rf','rm','it','cm','ma'].forEach(k=>c[k]=num(k));
+ c.mana=150+c.k+Math.floor(c.cm/10)*25;c.ep=100+Math.floor((c.rf+c.rm)/10)*25;c.tarjas={0:0,75:1000,150:25000}[c.k];
+ const w=c.h.trim().split(/\s+/).filter(Boolean).length;if(w<80){$('#msg').textContent=' A história precisa de 80 palavras ('+w+').';return}
+ await add('chars',c);$('#n').value=$('#h').value='';$('#msg').textContent=' Ficha salva!'}
+const CH=id=>CHARS.find(c=>c.id===id);
+async function grant(c,xp,tj){let lv=c.lv,x=c.xp+xp;while(lv<10&&x>=XP[lv-1]){x-=XP[lv-1];lv++}await upd('chars',c.id,{lv,xp:x,tarjas:(c.tarjas||0)+tj})}
+const xp50=id=>grant(CH(id),50,0);
+function delChar(id){if(confirm('Excluir ficha?'))del('chars',id)}
+function addItem(id){const n=prompt('Nome do item:');if(!n)return;const c=CH(id);upd('chars',id,{inv:[...(c.inv||[]),{n,q:1}]})}
+function rmItem(id,j){const c=CH(id);upd('chars',id,{inv:(c.inv||[]).filter((_,i)=>i!==j)})}
+function roll(s){const d=Math.ceil(Math.random()*s);let b=0,nome='';const ci=$('#dc').value,a=$('#da').value;if(ci&&a!=='0'){const c=CH(ci);b+=Math.floor((c[a]||0)/10);nome=c.n+' '}b+=num('dx');const t=d+b;$('#res').textContent=`${t}  (d${s}: ${d}${b?' + '+b:''})`;const L=store.get('log',[]);L.unshift(`${nome}d${s}: ${d}${b?' + '+b:''} = ${t}`);store.set('log',L.slice(0,30));$('#log').innerHTML=L.slice(0,30).map(x=>`<div>${esc(x)}</div>`).join('')}
+function addNews(){const t=$('#nt').value.trim();if(t){add('news',{text:t,by:ME.name});$('#nt').value=''}}
+function post(){const t=$('#pt').value.trim();if(!t)return;add('posts',{by:ME.name,char:$('#pc').value,text:t});$('#pt').value=''}
+function nextTurn(){add('posts',{kind:'turn',by:ME.name,text:'Turno '+((window.PT||0)+1)})}
+function addTok(){const n=$('#tn').value.trim();if(!n)return;add('tokens',{n,hp:num('th'),max:num('th'),c:$('#tc').value,x:0,y:0,cond:'',init:0,by:ME.id});$('#tn').value=''}
+function drawMesa(){const g=$('#grid');if(!g)return;const fog=$('#fg')&&$('#fg').checked;let h='';
+ for(let y=0;y<8;y++)for(let x=0;x<12;x++){const t=TOK.find(k=>k.x===x&&k.y===y);const f=fog&&TOK.length&&!TOK.some(k=>Math.max(Math.abs(k.x-x),Math.abs(k.y-y))<=3);
+  h+=`<div class="${f?'fog':''}" onclick="cellClick(${x},${y})">${t&&!f?`<div class="tk ${SEL===t.id?'sel':''}" style="background:${t.c}" onclick="event.stopPropagation();SEL='${t.id}';drawMesa()">${esc(t.n.slice(0,2))}</div>`:''}</div>`}
+ g.innerHTML=h;$('#tl').innerHTML=[...TOK].sort((a,b)=>b.init-a.init).map(t=>`<div class="post"><b style="color:${t.c}">●</b> ${esc(t.n)} <span class="tag">Init ${t.init}</span> HP ${t.hp}/${t.max} ${t.cond?`<span class="tag">${esc(t.cond)}</span>`:''}<button class="btn s" onclick="upd('tokens','${t.id}',{hp:${t.hp-10}})">−10</button><button class="btn s" onclick="upd('tokens','${t.id}',{hp:${t.hp+10}})">+10</button><button class="btn s" onclick="cond('${t.id}')">Condição</button><button class="btn s" onclick="del('tokens','${t.id}')">x</button></div>`).join('')||'<p class="mut">Sem tokens.</p>'}
+function cellClick(x,y){if(SEL){upd('tokens',SEL,{x,y});SEL=null}}
+const cond=id=>{const c=prompt('Condição (vazio para limpar):','');if(c!==null)upd('tokens',id,{cond:c})};
+function rollInit(){TOK.forEach(t=>upd('tokens',t.id,{init:Math.ceil(Math.random()*20)}))}
+const mapInfo=i=>{$('#mi').innerHTML=`<h3>${MP[i][0]}</h3>${MP[i][3]}`};
+function addEv(){const t=$('#ex').value.trim();if(t){add('events',{tipo:$('#et').value,text:t});$('#ex').value=''}}
+function drawChat(){const c=$('#ch');if(!c)return;c.innerHTML=(CM||[]).filter(m=>m.room===ROOM).slice(-60).map(m=>`<div class="post"><b>${esc(m.who)}</b> <span class="mut">${esc(m.by)}</span><br>${esc(m.text)}</div>`).join('')||`<p class="mut">Sala ${esc(ROOM)} vazia.</p>`;c.scrollTop=1e9}
+function sendChat(){const t=$('#cx').value.trim();if(!t)return;add('chat',{room:ROOM,who:$('#cp').value||ME.name,by:ME.name,text:t});$('#cx').value=''}
+function buy(n,p){const id=$('#lc').value,c=CH(id);if(!c){toast('Escolha um personagem.');return}if((c.tarjas||0)<p){toast('Tarjas insuficientes.');return}upd('chars',id,{tarjas:c.tarjas-p,inv:[...(c.inv||[]),{n,q:1}]});toast('Comprado: '+n)}
+function addShop(){const n=$('#sn').value.trim();if(n)add('shop',{n,p:num('sp'),k:$('#sk2').value||'Especiais'})}
+function drawArm(){const l=$('#al');if(!l)return;const f=$('#ar').value;l.innerHTML=(AR||[]).filter(x=>!f||x.r===f).map(x=>`<div class="card"><h3>${esc(x.n)}</h3><span class="tag">${esc(x.r)}</span><p>${esc(x.d||'')}</p>${isMod()?`<button class="btn s" onclick="del('armory','${x.id}')">x</button>`:''}</div>`).join('')||'<p class="mut">Nenhum equipamento cadastrado.</p>'}
+function addArm(){const n=$('#an').value.trim();if(n)add('armory',{n,r:$('#ak').value,d:$('#ad').value})}
+const RK=['Etório','Drigênio','Cáurido','Berípeta','Arysalis','Sagistral','SSídeo'];
+const MD=[['Pacífico',i=>4+2*i,i=>20+5*i,i=>500+50*i],['Fácil',i=>20+4*i,i=>70+5*i,i=>2500+250*i],['Média',i=>40+5*i,i=>120+5*i,i=>[6000,6800,7200,7600,8000,8400,8800][i]],['Arriscada',i=>50+5*i,i=>130+5*i,i=>8000+500*i],['Difícil',i=>70+5*i,i=>[200,250,300,350,400,450,500][i],i=>20000+5000*i],['Extrema',i=>100+5*i,i=>550+50*i,i=>55000+5000*i],['Impossível',i=>i<6?150+10*i:250,i=>900+50*i,i=>90000+5000*i]];
+function drawMG(){const b=$('#mb');if(!b)return;const m=MD[+$('#md').value];b.innerHTML=RK.map((r,i)=>`<div class="card"><h3>${m[0]} · ${r}</h3><p class="mut">${m[1](i)}x em atributos</p><span class="tag">${m[2](i)} xp</span><span class="tag">${m[3](i).toLocaleString('pt-BR')} tarjas</span><br><button class="btn s" onclick="acceptQ('${m[0]} ${r}',${m[2](i)},${m[3](i)})">Aceitar</button></div>`).join('')}
+function acceptQ(label,xp,tj){const id=$('#mc').value;if(!id){toast('Crie um personagem.');return}add('mq',{owner:ME.id,by:ME.name,cid:id,label:$('#mg').value+': '+label,xp,tj,status:'ativa'});toast('Missão aceita.')}
+async function approveQ(id){const q=LOC.get('mq').find(x=>x.id===id)||(await DB.collection('mq').doc(id).get()).data();const c=CH(q.cid);if(c)await grant(c,q.xp,q.tj);upd('mq',id,{status:'concluída'})}
+let MEM=[],MF=[];
+function memStart(){const e=['🔥','💧','🌪️','⛰️','⚡','🌙','🗡️','🐉'];MEM=[...e,...e].sort(()=>Math.random()-.5);MF=[];window.MD2=[];memDraw()}
+function memDraw(){const m=$('#mm');if(!m)return;m.innerHTML=MEM.map((e,i)=>`<button onclick="memClick(${i})">${MD2.includes(i)||MF.includes(i)?e:'?'}</button>`).join('')}
+function memClick(i){if(MF.length>=2||MF.includes(i)||MD2.includes(i))return;MF.push(i);memDraw();if(MF.length===2){const[a,b]=MF;setTimeout(()=>{if(MEM[a]===MEM[b])MD2.push(a,b);MF=[];memDraw();if(MD2.length===16&&$('#mmsg'))$('#mmsg').textContent='Vitória! 🏆'},600)}}
+let RT=0,RH;function reflex(){const b=$('#rb');if(b.dataset.s==='go'){const ms=Date.now()-RT;b.dataset.s='';b.textContent='Começar';const best=Math.min(ms,store.get('bestR',9e9));store.set('bestR',best);$('#rmsg').textContent=`${ms} ms · melhor ${best} ms`;return}if(b.dataset.s==='wait'){clearTimeout(RH);b.dataset.s='';b.textContent='Cedo demais! Tente de novo';return}b.dataset.s='wait';b.textContent='Aguarde…';RH=setTimeout(()=>{b.dataset.s='go';b.textContent='AGORA!';RT=Date.now()},1000+Math.random()*2500)}
+function duel(e){const L=['Água','Fogo','Vento','Terra'],w={Água:'Fogo',Fogo:'Vento',Vento:'Terra',Terra:'Água'},o=pick(L);$('#dmsg').textContent=`Você: ${e} · Oponente: ${o} → ${e===o?'Empate':w[e]===o?'Vitória!':'Derrota'}`}
+function boot(){initRuntime();const g=store.get('guest',null);if(store.get('mode',0)==='guest'&&g){ME={id:'g_'+g.id,name:g.name,role:'Player',guest:1};enter()}}
+boot();
+
+</script></body></html>
