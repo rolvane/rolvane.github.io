@@ -5,8 +5,8 @@ const cfg = window.MENPHIS_CONFIG || {};
 const KB = window.RPG_KB || [];
 const $ = (s,r=document) => r.querySelector(s);
 const API = 'https://generativelanguage.googleapis.com/v1beta/models/';
-const TEXT_MODEL = cfg.GEMINI_TEXT_MODEL || 'gemini-2.5-flash';
-const IMG_MODEL  = cfg.GEMINI_IMAGE_MODEL || 'gemini-2.5-flash-image';
+const TEXT_MODEL = cfg.GEMINI_TEXT_MODEL || 'gemini-3.8-flash';
+const IMG_MODEL  = cfg.GEMINI_IMAGE_MODEL || 'gemini-3.8-flash-image';
 const hasKey = () => cfg.GEMINI_API_KEY && !/COLE/.test(cfg.GEMINI_API_KEY);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
