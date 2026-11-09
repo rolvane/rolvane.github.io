@@ -433,7 +433,7 @@
   </div>
 
   <div class="wrap">
-    <div class="section-title"><span class="dot"></span> 🆕 Novidades da Atualização <small id="verTag">v6</small></div>
+    <div class="section-title"><span class="dot"></span> 🆕 Novidades da Atualização <small id="verTag">v7</small></div>
     <div class="quick-grid">
       <a class="quick-card new" href="#/tutorial"><div class="ico">📖</div><b>Tutorial</b><small>Livro de regras completo</small></a>
       <a class="quick-card new" href="#/" data-scroll="chatBox"><div class="ico">🔮</div><b>Guardião IA</b><small>Tire dúvidas do RPG</small></a>
@@ -650,7 +650,7 @@
 <input class="field" id="aiKey" type="password" placeholder="Cole a chave do Gemini (AIza...)" autocomplete="off" spellcheck="false">
 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn btn-primary" id="aiSave" type="button">Salvar chave</button><button class="btn" id="aiTest" type="button">Testar</button><button class="btn" id="aiRemove" type="button">Remover</button></div>
 <details style="margin-top:12px"><summary class="tiny muted" style="cursor:pointer">Modelos (avançado)</summary>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input class="field" id="aiTextModel" placeholder="Modelo de texto (padrão gemini-2.5-flash)" style="flex:1 1 200px"><input class="field" id="aiImageModel" placeholder="Modelo de imagem (padrão gemini-2.5-flash-image)" style="flex:1 1 200px"><button class="btn btn-sm" id="aiModels" type="button">Salvar modelos</button></div></details>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><input class="field" id="aiTextModel" placeholder="Modelo de texto (padrão gemini-3.8-flash)" style="flex:1 1 200px"><input class="field" id="aiImageModel" placeholder="Modelo de imagem (padrão gemini-nano-banana-2.1)" style="flex:1 1 200px"><button class="btn btn-sm" id="aiModels" type="button">Salvar modelos</button></div></details>
 <p class="tiny" id="aiMsg" style="margin-top:10px;color:#fcd34d"></p>
 <p class="tiny muted" style="margin-top:6px">A chave fica guardada só no servidor (Supabase) e nunca volta ao navegador — o painel mostra só os 4 últimos caracteres. Ela permanece salva e só muda se um administrador salvar outra ou remover.</p></div><div class="card" style="margin-bottom:14px"><b>🔔 Publicar notícia</b><textarea class="field" id="newsText" rows="3" style="margin:8px 0"></textarea><button class="btn btn-primary" id="newsSave">Publicar</button></div><div id="newsList"></div><div class="section-title"><span class="dot"></span> 👥 Usuários</div><div id="userList"></div></div></div></section>
 
@@ -1361,12 +1361,12 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 </script>
 <script>window.goTo=function(id){var e=document.getElementById(id);if(!e)return;var go=function(){e.scrollIntoView({behavior:"smooth",block:"center"})};if(location.hash&&location.hash!=="#/"&&location.hash!=="#"){location.hash="#/";setTimeout(go,550)}else go()}</script>
-<script src="config.js?v=6"></script>
-<script src="rpg-knowledge.js?v=6"></script>
-<script src="tutorial.js?v=6"></script>
-<script src="ai.js?v=6"></script>
-<script src="fx.js?v=6"></script>
+<script src="config.js?v=7"></script>
+<script src="rpg-knowledge.js?v=7"></script>
+<script src="tutorial.js?v=7"></script>
+<script src="ai.js?v=7"></script>
+<script src="fx.js?v=7"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="app.js?v=6"></script>
+<script src="app.js?v=7"></script>
 </body>
 </html>
