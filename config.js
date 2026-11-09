@@ -6,7 +6,7 @@ window.MENPHIS_CONFIG = {
 
   // Gemini (chat do RPG + Arte IA). ATENÇÃO: esta chave fica visível a quem abrir o site.
   // Restrinja-a por "HTTP referrers" no Google AI Studio / Cloud Console (veja README).
-  GEMINI_API_KEY: "AIzaSyDSdYZK6DHWrM9mzWHSypIzwwA1IRj_nX8",
-  GEMINI_TEXT_MODEL: "gemini-2.5-flash",
-  GEMINI_IMAGE_MODEL: "gemini-2.5-flash-image"
+  GEMINI_API_KEY: "AQ.Ab8RN6ImKI-gV8ShbGcqbmAJTZBYm3FxV2twruIq-2umYBJsXA",
+  GEMINI_TEXT_MODEL: "gemini-3.8-flash",
+  GEMINI_IMAGE_MODEL: "gemini-3.8-flash-image"
 };
