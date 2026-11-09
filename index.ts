@@ -7,6 +7,8 @@ const cors = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
+const TEXT_MODELS = ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-2.5-flash"];
+const IMAGE_MODELS = ["gemini-nano-banana-2.1", "gemini-3.1-flash-image", "gemini-2.5-flash-image"];
 const json = (obj: unknown, status = 200) =>
   new Response(JSON.stringify(obj), { status, headers: { ...cors, "Content-Type": "application/json" } });
 
@@ -28,13 +30,26 @@ Deno.serve(async (req) => {
     const m = Object.fromEntries((rows || []).map((r: { key: string; value: string }) => [r.key, r.value]));
     if (!m.gemini_api_key) return json({ error: "A IA ainda não foi ativada: o administrador precisa salvar a chave do Gemini no Painel Admin." }, 503);
 
-    const model = kind === "image" ? (m.gemini_image_model || "gemini-2.5-flash-image") : (m.gemini_text_model || "gemini-2.5-flash");
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": m.gemini_api_key },
-      body: JSON.stringify(payload),
-    });
-    return new Response(await r.text(), { status: r.status, headers: { ...cors, "Content-Type": "application/json" } });
+    // Modelo escolhido pelo admin (se houver) vem primeiro; depois a lista de reserva.
+    // Se o Google tirar um modelo do ar (404 / "não está mais disponível"), tenta o próximo.
+    const preferred = kind === "image" ? m.gemini_image_model : m.gemini_text_model;
+    const defaults = kind === "image" ? IMAGE_MODELS : TEXT_MODELS;
+    const list = [...new Set([preferred, ...defaults].filter(Boolean))] as string[];
+
+    let last = { status: 500, text: JSON.stringify({ error: "Nenhum modelo respondeu." }) };
+    for (const model of list) {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": m.gemini_api_key },
+        body: JSON.stringify(payload),
+      });
+      const text = await r.text();
+      if (r.ok) return new Response(text, { status: 200, headers: { ...cors, "Content-Type": "application/json", "X-Gemini-Model": model } });
+      last = { status: r.status, text };
+      const modelGone = r.status === 404 || /no longer available|not found|is not supported|deprecated/i.test(text);
+      if (!modelGone) break; // erro real (chave inválida, cota, conteúdo bloqueado): outro modelo não resolve
+    }
+    return new Response(last.text, { status: last.status, headers: { ...cors, "Content-Type": "application/json" } });
   } catch (e) {
     return json({ error: String(e) }, 500);
   }
