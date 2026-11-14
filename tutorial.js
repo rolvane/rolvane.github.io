@@ -2,7 +2,7 @@
 (function(){
 'use strict';
 const KB = (window.RPG_KB || []).filter(c => c.t.startsWith('Livro de Regras'));
-const page = n => { const c = KB.find(k => k.t.endsWith('pág. ' + n + ')')); return c ? c.x : ''; };
+const page = n => { const c = KB.find(k => new RegExp('pág\\. ' + n + '\\)').test(k.t)); return c ? c.x : ''; };
 const SECTIONS = [
   ['regras','📜','Regras de Convivência e Participação',[2]],
   ['prologo','📖','Prólogo — Os Ecos do Colapso',[3,4]],
