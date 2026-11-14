@@ -15,6 +15,7 @@ if(!cfg.SUPABASE_URL || /COLE/.test(cfg.SUPABASE_URL)){
 }
 const sb = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY, {auth:{flowType:'pkce', detectSessionInUrl:true, persistSession:true}});
 window.MENPHIS_ONLINE = true; window.MENPHIS_SB = sb;
+window.MENPHIS_CH = () => CH; window.MENPHIS_ROLL = (c, s, b, ctx) => rollDB(c, s, b, ctx);
 let ME = null, PROF = null, NAMES = {}, CH = [];
 const isStaff = () => PROF && (PROF.role==='mestre' || PROF.role==='admin');
 const isAdmin = () => PROF && PROF.role==='admin';
@@ -60,12 +61,14 @@ async function start(user){
     PROF = rows.find(r => r.id === user.id);
     if(!PROF){ PROF = fallback; banner('⚠️ Seu perfil não existe no banco. Rode o arquivo update_v3.sql no Supabase e entre de novo.'); }
   } catch(e){ PROF = fallback; banner('⚠️ Banco não configurado. Rode o schema.sql e o update_v3.sql no Supabase.'); }
+  window.MENPHIS_PROF = PROF;
   document.body.className = (isStaff() ? 'is-staff ' : '') + (isAdmin() ? 'is-admin' : '');
   try { const r = await sb.rpc('ai_ready'); window.MENPHIS_AI_READY = r.data === true; } catch(e){ window.MENPHIS_AI_READY = false; }
   window.dispatchEvent(new Event('menphis-status'));
   gate.style.display = 'none';
   $('#userBar').innerHTML = '👤 <b>'+esc(PROF.username)+'</b> · '+PROF.role+' · <a href="#" onclick="logout();return false">Sair</a>';
   try { CH = await run(sb.from('characters').select('*').order('created_at')); } catch(e){ CH = []; }
+  window.dispatchEvent(new Event('menphis-ready'));
   loadView();
 }
 function banner(msg){
@@ -81,7 +84,7 @@ window.addEventListener('hashchange', loadView);
 /* ---------- personagens ---------- */
 const charCard = (c, del) => { const cl = CLANS[c.clan] || {icon:'',color:'#e50914'};
   return '<div class="char-card"><b>'+cl.icon+' '+esc(c.name)+'</b> <span class="tiny muted">· '+esc(c.clan)+(c.variant?' ('+esc(c.variant)+')':'')+' · Nível '+c.level+(c.kingdom?' · 📍 '+esc(c.kingdom):'')+(c.owner!==ME.id?' · de '+esc(who(c.owner)):'')+'</span>'+
-  statBars(c.stats, cl.color) + (del && (c.owner===ME.id || isStaff()) ? '<button class="btn btn-sm" onclick="delChar(\''+c.id+'\')">Excluir</button>' : '') + '</div>'; };
+  statBars(c.stats, cl.color) + (own => '<div class="row-btns"><button class="btn btn-sm btn-primary" onclick="openChar(\''+c.id+'\')">📜 Abrir ficha</button>'+(own?'<button class="btn btn-sm" onclick="editChar(\''+c.id+'\')">✏️ Editar</button>':'')+(del&&own?'<button class="btn btn-sm" onclick="delChar(\''+c.id+'\')">Excluir</button>':'')+'</div></div>')(c.owner===ME.id || isStaff()); };
 window.renderChars = async function(){
   if(!ME) return; await refreshChars();
   const list = isStaff() ? CH : mine();
@@ -160,7 +163,7 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 async function loadHome(){
   loadDice().catch(()=>{});
   await refreshChars(); const m = mine();
-  $('#homeChars').innerHTML = m.length ? m.map(c => '<div class="char-card"><b>'+(CLANS[c.clan]||{}).icon+' '+esc(c.name)+'</b> <span class="tiny muted">· '+esc(c.clan)+' · Nível '+c.level+'</span></div>').join('') : '<div class="empty"><span class="big">⚔️</span><p>Nenhum personagem criado ainda.</p></div>';
+  $('#homeChars').innerHTML = m.length ? m.map(c => '<div class="char-card"><b>'+(CLANS[c.clan]||{}).icon+' '+esc(c.name)+'</b> <span class="tiny muted">· '+esc(c.clan)+' · Nível '+c.level+'</span> <button class="btn btn-sm" onclick="openChar(\''+c.id+'\')">📜 Abrir</button></div>').join('') : '<div class="empty"><span class="big">⚔️</span><p>Nenhum personagem criado ainda.</p></div>';
   const news = await run(sb.from('news').select('*').order('created_at',{ascending:false}).limit(8));
   $('#homeNews').innerHTML = news.length ? news.map(n => '<div class="card" style="margin-bottom:8px"><p style="font-size:13px;white-space:pre-line">'+esc(n.text)+'</p><p class="tiny muted" style="margin-top:4px">'+esc(who(n.author))+' · '+fmt(n.created_at)+'</p></div>').join('') : '<div class="empty"><span class="big">🔔</span><p>Sem notícias por enquanto.</p></div>';
 }
