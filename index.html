@@ -402,6 +402,33 @@
   .sl-skill{border-left:2px solid #38bdf8;padding:5px 10px;margin-bottom:5px;background:rgba(56,189,248,.05)}.sl-skill b{display:block;font-size:13px;color:#fff}.sl-skill small{color:#8fb8dd;font-size:12px}
   .sl-tag{display:inline-block;border:1px solid rgba(56,189,248,.4);padding:3px 10px;margin:0 6px 6px 0;font-size:12px;background:rgba(56,189,248,.06)}
   .sl-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:14px;border-top:1px solid rgba(56,189,248,.3);padding-top:12px}
+
+  /* ---------- menu: novidades ---------- */
+  .nav a.hot,.mobile-nav a.hot{color:#fff;background:rgba(229,9,20,.16);border:1px solid rgba(229,9,20,.45);border-radius:999px}
+  .mobile-nav a.hot{border-radius:10px}.mobile-nav a em{font-style:normal;font-size:9px;background:var(--accent);color:#fff;padding:2px 6px;border-radius:6px;margin-left:6px;vertical-align:middle}
+  .menu-sec{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6f6f7c;padding:10px 14px 4px;font-weight:800}
+  /* ---------- Missão Automático ---------- */
+  .ma-rank{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;animation:riseIn .45s var(--ease) both}
+  .ma-rank>div:first-child{flex:1 1 150px}.ma-rank small{display:block;color:#6f6f7c;font-size:11px}.ma-rank.lock{opacity:.55}.ma-rw{font-size:12px;color:#fcd34d}
+  .ma-resume{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:var(--radius);padding:14px}
+  .ma-stage{max-width:740px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:16px 20px}
+  .ma-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.ma-tag{font-size:10px;background:rgba(251,191,36,.15);color:var(--amber);padding:2px 8px;border-radius:999px;margin-left:6px}
+  .ma-hp{color:#ef4444;letter-spacing:2px;font-size:15px}.ma-bar{height:6px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;margin-bottom:4px}.ma-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#b91c1c,#fbbf24);transition:width .8s var(--ease)}
+  .ma-box{min-height:150px;max-height:340px;overflow-y:auto;font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.8;cursor:pointer;scroll-behavior:smooth;margin-bottom:12px}
+  .ma-narr{margin:0}.ma-narr.typing::after,.ma-narr .typing::after{content:'▍';animation:blink .8s infinite}.ma-box .typing::after{content:'▍';animation:blink .8s infinite}
+  .ma-roll{font-family:system-ui,sans-serif;font-size:12.5px;border-left:3px solid var(--border);padding:6px 10px;margin-bottom:10px;background:rgba(255,255,255,.03)}.ma-roll.ok{border-color:#22c55e}.ma-roll.no{border-color:#ef4444}.ma-roll .g{color:#4ade80;font-weight:800}.ma-roll .r{color:#f87171;font-weight:800}
+  .ma-opts{display:grid;gap:8px}.ma-opt{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;text-align:left;background:#252a3c;border:1px solid var(--border);border-left:4px solid #64748b;color:#fff;border-radius:10px;padding:11px 14px;cursor:pointer;font-family:inherit;font-size:14px;transition:transform .2s var(--ease),background .2s;animation:riseIn .4s var(--ease) both}
+  .ma-opt:hover:not(:disabled){transform:translateX(4px);background:#2f3550}.ma-opt:disabled{opacity:.5;cursor:wait}.ma-opt .ma-m{font-size:11px;color:#9b9ba8}.ma-opt em{font-style:normal;font-weight:800}
+  .ma-opt.good{border-left-color:#22c55e}.ma-opt.good em{color:#4ade80}.ma-opt.mid{border-left-color:#fbbf24}.ma-opt.mid em{color:#fcd34d}.ma-opt.hard{border-left-color:#f97316}.ma-opt.hard em{color:#fb923c}.ma-opt.bad{border-left-color:#ef4444}.ma-opt.bad em{color:#f87171}
+  .ma-end{border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.06);border-radius:12px;padding:14px 16px;animation:popIn .5s var(--ease) both}.ma-end h3{font-size:18px;margin-bottom:8px}.ma-rwd{display:flex;gap:8px;flex-wrap:wrap}.ma-rwd span{background:rgba(255,255,255,.06);padding:5px 10px;border-radius:8px;font-size:13px;font-weight:700}
+  .ma-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.ma-lg{font-size:12px;padding:6px 0;border-bottom:1px solid var(--border);color:#b8b8c4}.ma-lg.ok b{color:#4ade80}.ma-lg.no b{color:#f87171}
+  /* ---------- Informantes ---------- */
+  .in-m{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer}.in-m small{display:block;color:#8a8a98;font-size:11px}
+  .in-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:13px}.in-card.good{border-color:#16a34a;background:rgba(22,163,74,.08)}.in-card.bad{border-color:#b91c1c;background:rgba(185,28,28,.08)}
+  .in-clue{background:var(--bg-card);border:1px solid var(--border);border-left:4px solid #64748b;border-radius:10px;padding:10px 14px;margin-bottom:8px;animation:riseIn .4s var(--ease) both}.in-clue.t2{border-left-color:#fbbf24}.in-clue.t3{border-left-color:#ef4444}.in-clue p{font-size:13.5px;line-height:1.6;margin:4px 0}.in-clue blockquote,.in-step blockquote{font-family:Georgia,serif;font-size:12.5px;color:#a8a8b6;border-left:2px solid var(--border);padding-left:10px;margin:6px 0 0}
+  .in-t{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#9b9ba8}
+  .in-wanted{display:flex;gap:12px;align-items:center;background:var(--bg-card);border:1px solid rgba(239,68,68,.35);border-radius:10px;padding:10px 14px;margin-bottom:8px}.in-wanted>div:nth-child(2){flex:1}.in-wanted small{display:block;color:#8a8a98}.in-stars{color:#fbbf24;font-size:12px;letter-spacing:1px}.in-bounty{font-weight:800;color:#fcd34d}
+  .in-step{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:8px}.in-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}.in-row .field{flex:1 1 110px;padding:7px 9px;font-size:12.5px}.field.mini{flex:0 1 90px!important;width:90px}
 </style>
 </head>
 <body>
@@ -415,6 +442,8 @@
     <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
     <nav class="nav" id="nav">
       <a href="#/">Home</a>
+      <a href="#/missao-auto" class="hot">🤖 Missão Automático</a>
+      <a href="#/intel" class="hot">🕵️ Informantes</a>
       <a href="#/personagens">Personagens</a>
       <a href="#/clas">Clãs</a>
       <a href="#/tutorial">Tutorial</a>
@@ -432,6 +461,12 @@
     </nav>
   </div>
   <nav class="mobile-nav" id="mobileNav">
+    <div class="menu-sec">🆕 Novidades</div>
+    <a href="#/missao-auto" class="hot">🤖 Missão Automático <em>NOVO</em></a>
+    <a href="#/intel" class="hot">🕵️ Informantes <em>NOVO</em></a>
+    <a href="#/jogo" class="hot">🎮 Jogo de Narração</a>
+    <a href="#/tutorial" class="hot">📖 Tutorial</a>
+    <div class="menu-sec">Menu</div>
     <a href="#/">Home</a>
     <a href="#/personagens">Personagens</a>
     <a href="#/clas">Clãs</a>
@@ -483,7 +518,7 @@
   </div>
 
   <div class="wrap">
-    <div class="section-title"><span class="dot"></span> 🆕 Novidades da Atualização <small id="verTag">v8</small></div>
+    <div class="section-title"><span class="dot"></span> 🆕 Novidades da Atualização <small id="verTag">v9</small></div>
     <div class="quick-grid">
       <a class="quick-card new" href="#/tutorial"><div class="ico">📖</div><b>Tutorial</b><small>Livro de regras completo</small></a>
       <a class="quick-card new" href="#/" data-scroll="chatBox"><div class="ico">🔮</div><b>Guardião IA</b><small>Tire dúvidas do RPG</small></a>
@@ -493,6 +528,8 @@
       <a class="quick-card new" href="#/tabletop"><div class="ico">⚔️</div><b>Tabletop</b><small>Tokens sincronizados</small></a>
       <a class="quick-card new" href="#/mapa"><div class="ico">🗺️</div><b>Mapa</b><small>Reinos e viagens</small></a>
       <a class="quick-card new" href="#/missoes"><div class="ico">🗡️</div><b>Missões</b><small>Quadro das guildas</small></a>
+      <a class="quick-card new" href="#/missao-auto"><div class="ico">🤖</div><b>Missão Automático</b><small>Missões infinitas · 10 escolhas</small></a>
+      <a class="quick-card new" href="#/intel"><div class="ico">🕵️</div><b>Informantes</b><small>Rastros, procurados</small></a>
       <a class="quick-card new" href="#/jogo"><div class="ico">🎮</div><b>Jogo de Narração</b><small>Aventura em tempo real</small></a>
       <a class="quick-card new" href="#/personagens"><div class="ico">📜</div><b>Ficha completa</b><small>Janela de status</small></a>
       <a class="quick-card new" href="#/regioes"><div class="ico">🧭</div><b>Regiões</b><small>Eventos e perigos</small></a>
@@ -595,7 +632,8 @@
 <section class="view" id="view-jogo">
   <div class="wrap">
     <div class="page-head"><div><h1 class="page-title">🎮 Jogo de Narração</h1><p class="page-sub">Aventura interativa em tempo real: o narrador fala, mostra cenas e abre até 5 escolhas</p></div></div>
-    <div id="vnHome">
+    <div class="chips" style="margin-bottom:14px"><a class="chip" id="modeManual" href="#/jogo">👥 Com narrador ao vivo</a><a class="chip" id="modeAuto" href="#/missao-auto">🤖 Missão Automático</a></div>
+    <div id="vnManual"><div id="vnHome">
       <div class="card staff-only" style="margin-bottom:14px"><div style="display:flex;gap:8px;flex-wrap:wrap"><input class="field" id="vnNewTitle" placeholder="Título da nova aventura" style="flex:1 1 200px"><button class="btn btn-primary" id="vnNew" type="button">+ Criar aventura</button></div></div>
       <div id="vnList"></div>
     </div>
@@ -626,6 +664,50 @@
           <div id="edChoices"></div>
           <div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-primary" id="edSave" type="button">Salvar cena</button><button class="btn" id="edCancel" type="button">Cancelar</button></div></div>
       </div>
+    </div>
+    </div>
+    <div id="maAuto" style="display:none">
+      <div class="card ma-intro" style="margin-bottom:14px"><b>🤖 Missão Automático</b><p class="tiny muted" style="margin-top:6px">A IA interna cria uma missão <b>inédita</b> a cada partida, com história, cenários e desfecho diferentes. São <b>10 escolhas</b>: você só clica nas opções. Nada que você digite é interpretado, e os dados, as recompensas e as consequências são decididos pelo servidor.</p></div>
+      <div id="maHome">
+        <div class="card" style="margin-bottom:12px"><div class="sheet-row"><div><label class="tiny muted">Personagem</label><select class="field" id="maChar"></select></div><div><label class="tiny muted">Hoje</label><div class="tiny" id="maInfo"></div></div></div></div>
+        <div id="maRanks"></div>
+      </div>
+      <div id="maPlay" style="display:none"><div class="ma-stage">
+        <div class="ma-top"><div><b id="maTitle"></b> <span class="ma-tag" id="maRankTag"></span></div><div class="ma-hp" id="maHp" title="Fôlego"></div></div>
+        <div class="ma-bar"><i id="maProg"></i></div><div class="tiny muted" id="maProgTxt" style="margin-bottom:10px"></div>
+        <div class="ma-box" id="maBox" title="Clique para pular a digitação"></div>
+        <div class="ma-opts" id="maOpts"></div>
+        <div class="ma-end" id="maEnd" style="display:none"></div>
+        <div class="ma-foot"><button class="btn btn-sm" id="maLogBtn" type="button">📖 Diário da missão</button><button class="btn btn-sm" id="maAbandon" type="button">🏳️ Abandonar</button></div>
+        <div id="maLog" style="display:none"></div>
+        <p class="tiny muted" style="margin-top:10px">🔒 A IA só aceita as opções mostradas. Os resultados são decididos no servidor.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="view" id="view-intel">
+  <div class="wrap">
+    <div class="page-head"><div><h1 class="page-title">🕵️ Rede de Informantes</h1><p class="page-sub">Rastros deixados em missões: compre informações, procure armas e jogadores, e cuide da sua reputação</p></div></div>
+    <div class="chips" id="inTabs" style="margin-bottom:14px"><button class="chip active" data-t="buy" type="button">🕵️ Informantes</button><button class="chip" data-t="book" type="button">📓 Meu caderno</button><button class="chip" data-t="wanted" type="button">🚨 Procurados</button><button class="chip staff-only" data-t="central" type="button">🧠 Central do narrador</button></div>
+    <div id="inBuy">
+      <div class="card" style="margin-bottom:12px"><div class="sheet-row"><div><label class="tiny muted">Personagem</label><select class="field" id="inChar"></select></div><div><label class="tiny muted">Situação</label><div class="tiny" id="inBalance"></div></div></div>
+        <label class="tiny muted">O que você procura? (nome de player, NPC, arma, local)</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><input class="field" id="inQuery" placeholder="Ex.: Kael, Lâmina da Aurora, Porto Escarlate..." style="flex:1 1 200px" autocomplete="off"><button class="btn" id="inCatBtn" type="button">🔎 Consultar</button></div>
+        <div id="inCatalog" style="margin-top:10px"></div></div>
+      <div class="card" style="margin-bottom:12px"><b>Como obter a informação</b><div id="inMethods" style="margin-top:8px"></div><button class="btn btn-primary" id="inBuyBtn" type="button" style="margin-top:10px" disabled>Obter informação</button></div>
+      <div id="inResult"></div>
+    </div>
+    <div id="inBook" style="display:none"><input class="field" id="inFilter" placeholder="Filtrar por nome, arma ou local" style="margin-bottom:12px"><div id="inBookList"></div></div>
+    <div id="inWanted" style="display:none"><div class="section-title"><span class="dot"></span> 🚨 Quadro de Procurados</div><div id="inWantedList"></div><div class="section-title"><span class="dot"></span> Minha reputação</div><div id="inMyRep"></div></div>
+    <div id="inCentral" style="display:none">
+      <div class="card" style="margin-bottom:14px"><b>🧠 IA interna: analisar relatório de missão</b><p class="tiny muted" style="margin:6px 0 10px">Cole o texto da missão (nomes com inicial maiúscula, verbos no passado). A IA anota quem fez o quê, com que arma e onde. Roda no navegador, sem API.</p>
+        <input class="field" id="inTitle" placeholder="Título (ex.: Missão do Porto Escarlate)" style="margin-bottom:8px"><textarea class="field" id="inText" rows="8" placeholder="Cole aqui o texto da missão..."></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn btn-primary" id="inAnalyze" type="button">🧠 Analisar texto</button><button class="btn" id="inAddStep" type="button">+ Passo manual</button></div></div>
+      <div id="inPreview"></div>
+      <div id="inSaveBar" class="card" style="display:none;margin:12px 0"><label class="tiny"><input type="checkbox" id="inApplyRep" checked> Aplicar reputação/procurado sugerido aos players envolvidos</label><div style="margin-top:8px"><button class="btn btn-primary" id="inSaveReport" type="button">💾 Salvar rastros</button></div></div>
+      <div class="section-title"><span class="dot"></span> Rastros registrados</div><input class="field" id="inClueFilter" placeholder="Filtrar" style="margin-bottom:10px"><div id="inClues"></div>
+      <div class="section-title"><span class="dot"></span> Reputação</div>
+      <div class="card" style="margin-bottom:10px"><div style="display:flex;gap:8px;flex-wrap:wrap"><select class="field" id="inRepChar" style="flex:2 1 150px"></select><input class="field mini" id="inRepHero" type="number" placeholder="herói ±"><input class="field mini" id="inRepVillain" type="number" placeholder="vilão ±"><input class="field mini" id="inRepHeat" type="number" placeholder="procurado ±"><input class="field mini" id="inRepBounty" type="number" placeholder="recompensa"><button class="btn btn-sm btn-primary" id="inRepGo" type="button">Aplicar</button></div></div>
+      <div id="inRepTable"></div>
     </div>
   </div>
 </section>
@@ -1200,7 +1282,7 @@ const TOOL_LIST = [
 
 /* ---------- roteador ---------- */
 const ROUTES = {
-  "":"home","personagens":"personagens","clas":"clas","tutorial":"tutorial","jogo":"jogo","tabletop":"tabletop",
+  "":"home","personagens":"personagens","clas":"clas","tutorial":"tutorial","jogo":"jogo","missao-auto":"jogo","intel":"intel","tabletop":"tabletop",
   "narracoes":"narracoes","mapa":"mapa","notas":"notas","arte-ia":"arte-ia",
   "kionstore":"kionstore","regioes":"regioes","ferramentas":"ferramentas",
   "armaria":"armaria","missoes":"missoes","admin":"admin"
@@ -1450,14 +1532,16 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 </script>
 <script>window.goTo=function(id){var e=document.getElementById(id);if(!e)return;var go=function(){e.scrollIntoView({behavior:"smooth",block:"center"})};if(location.hash&&location.hash!=="#/"&&location.hash!=="#"){location.hash="#/";setTimeout(go,550)}else go()}</script>
-<script src="config.js?v=8"></script>
-<script src="rpg-knowledge.js?v=8"></script>
-<script src="tutorial.js?v=8"></script>
-<script src="ai.js?v=8"></script>
-<script src="fx.js?v=8"></script>
+<script src="config.js?v=9"></script>
+<script src="rpg-knowledge.js?v=9"></script>
+<script src="tutorial.js?v=9"></script>
+<script src="ai.js?v=9"></script>
+<script src="fx.js?v=9"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="app.js?v=8"></script>
-<script src="ficha.js?v=8"></script>
-<script src="vn.js?v=8"></script>
+<script src="app.js?v=9"></script>
+<script src="ficha.js?v=9"></script>
+<script src="vn.js?v=9"></script>
+<script src="intel.js?v=9"></script>
+<script src="missaoauto.js?v=9"></script>
 </body>
 </html>
