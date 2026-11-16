@@ -239,8 +239,9 @@ window.openChar = function(id){
     ${sh.personalidade ? '<div class="sl-sec"><h5>[ PERSONALIDADE ]</h5><p>' + esc(sh.personalidade) + '</p></div>' : ''}
     ${sh.gosto || sh.desgosto ? '<div class="sl-sec"><h5>[ GOSTOS ]</h5><p>👍 ' + esc(sh.gosto || '—') + ' &nbsp; 👎 ' + esc(sh.desgosto || '—') + '</p></div>' : ''}
     ${sh.historia ? '<details class="sl-sec"><summary>[ HISTÓRIA ]</summary><p>' + esc(sh.historia) + '</p></details>' : ''}
-    <div class="sl-actions">${own ? '<button class="btn btn-sm" id="slEdit">✏️ Editar ficha</button>' : ''}<button class="btn btn-sm" id="slExport">📤 Exportar .txt</button><button class="btn btn-sm" id="slClose">Fechar</button></div></div>`;
+    <div id="slRep"></div><div class="sl-actions">${own ? '<button class="btn btn-sm" id="slEdit">✏️ Editar ficha</button>' : ''}<button class="btn btn-sm" id="slExport">📤 Exportar .txt</button><button class="btn btn-sm" id="slClose">Fechar</button></div></div>`;
   w.classList.add('open'); w.scrollTop = 0;
+  if(window.MENPHIS_repHtml) window.MENPHIS_repHtml(id).then(h => { const r = $('#slRep'); if(r) r.innerHTML = h; });
   typeLine($('#slSys'), '[SISTEMA] Janela de status aberta. Bem-vindo, ' + c.name + '.');
   requestAnimationFrame(() => requestAnimationFrame(() => { $$('#slWin [data-w]').forEach(i => i.style.width = i.dataset.w + '%'); $$('#slWin [data-n]').forEach(b => countUp(b, +b.dataset.n)); }));
   $('#slWin .sl-x').onclick = $('#slClose').onclick = () => w.classList.remove('open');
