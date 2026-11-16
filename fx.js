@@ -34,6 +34,8 @@ const paintStatus = () => {
     ['Chat IA', typeof window.geminiImage === 'function', 'ai.js'],
     ['IA ativa (chave do admin)', !!window.MENPHIS_AI_READY, 'Painel Admin → IA'],
     ['Ficha completa', !!window.MENPHIS_FICHA, 'ficha.js'],
+    ['Missão Automático', !!window.MENPHIS_MAI, 'missaoauto.js'],
+    ['Informantes', !!window.MENPHIS_INTEL, 'intel.js'],
     ['Jogo de narração', !!window.MENPHIS_VN, 'vn.js'],
     ['Supabase', !!window.supabase, 'internet / bloqueador'],
     ['Sistema online', !!window.MENPHIS_ONLINE, 'app.js + config.js']
