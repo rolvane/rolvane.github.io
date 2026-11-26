@@ -1,0 +1,68 @@
+/* MENPHIS — acabamento visual (ouro + carmesim, tipografia de fantasia). Carrega depois do netflix.css */
+:root{--gold:#d4af37;--gold-soft:rgba(212,175,55,.38);--glass:rgba(22,22,26,.72);--ease:cubic-bezier(.22,1,.36,1);--serif:'Cinzel','Trajan Pro','Times New Roman',serif;--sans:'Inter','Helvetica Neue',Helvetica,Arial,system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);-webkit-font-smoothing:antialiased;background:radial-gradient(1100px 650px at 6% -8%,rgba(229,9,20,.13),transparent 60%),radial-gradient(900px 600px at 100% 105%,rgba(212,175,55,.08),transparent 55%),#0e0e10;background-attachment:fixed}
+::selection{background:rgba(229,9,20,.55);color:#fff}
+*{scrollbar-width:thin;scrollbar-color:#3a3a40 transparent}::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:#3a3a40;border-radius:8px}::-webkit-scrollbar-track{background:transparent}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* tipografia */
+.brand span,.nf-bb h1,.page-title,.nf-mban h2,.nf-prof-screen h1,#nfIntro span,.nf-orig i,.nf-num{font-family:var(--serif)!important}
+.brand span{font-weight:900;letter-spacing:.14em;font-size:25px;transform:none;text-shadow:0 0 22px rgba(229,9,20,.55)}
+.nf-bb h1{font-weight:900;letter-spacing:.03em;line-height:1.02;font-size:clamp(34px,6vw,76px)}
+.page-title{font-weight:800;letter-spacing:.04em}
+.nf-orig{color:var(--gold)}.nf-orig i{font-size:24px}
+.nf-row>h2{display:flex;align-items:center;gap:10px;letter-spacing:.02em}.nf-row>h2::before{content:'';width:4px;height:1.05em;border-radius:3px;background:linear-gradient(180deg,var(--gold),var(--nf-red));flex:none}
+.section-title{display:flex;align-items:center;gap:10px}.section-title::before{content:'';width:4px;height:1em;border-radius:3px;background:linear-gradient(180deg,var(--gold),var(--nf-red))}
+
+/* barra */
+.topbar.solid{background:rgba(14,14,16,.95)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,255,255,.06)!important}
+.nav a{position:relative}.nav a::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--nf-red);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}.nav a:hover::after,.nav a.active::after{transform:scaleX(1)}
+.nf-avatar{box-shadow:0 0 0 2px rgba(255,255,255,.12);transition:box-shadow .25s,transform .25s}.nf-avatar:hover{box-shadow:0 0 0 2px var(--gold);transform:scale(1.06)}
+.nf-profbox,.nf-morebox{background:rgba(14,14,16,.96);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-top:2px solid var(--gold);border-radius:0 0 10px 10px;box-shadow:0 18px 40px rgba(0,0,0,.55)}
+
+/* destaque */
+.nf-bb-bg{transform:translateY(calc(var(--py,0) * .28px));will-change:transform}
+.nf-bb-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.018) 46px 47px)}
+.nf-embers{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.nf-embers i{position:absolute;bottom:-12px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(circle,#ffd98a,#e5481a 60%,transparent 72%);opacity:0;animation:ember var(--d) var(--w) infinite linear;filter:blur(.4px)}
+@keyframes ember{0%{transform:translate(0,0);opacity:0}12%{opacity:.9}100%{transform:translate(var(--dx),-92vh);opacity:0}}
+.nf-bb-emoji{filter:blur(2px) drop-shadow(0 0 60px rgba(229,9,20,.35))}
+.nf-btn{box-shadow:0 8px 22px rgba(0,0,0,.35);transition:transform .25s var(--ease),background .2s,box-shadow .25s}.nf-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.45)}.nf-btn.play{background:#fff}
+.nf-meta .nf-age{border-radius:3px}.nf-dots button{border-radius:4px;transition:width .3s,background .3s}.nf-dots button.on{width:38px;background:var(--gold)}
+
+/* cartões */
+.nf-card,.nf-art{border-radius:9px}
+.nf-card{box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.nf-art::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(255,255,255,.22),transparent 38%),radial-gradient(circle at 80% 8%,rgba(255,255,255,.16),transparent 34%);pointer-events:none}
+.nf-art .em{z-index:1;transition:transform .5s var(--ease)}
+.nf-card:hover .nf-art .em{transform:scale(1.1) translateY(-2px)}
+.nf-card:hover{outline:1px solid var(--gold-soft)}
+.nf-cap{z-index:3}.nf-badge{border-radius:4px;box-shadow:0 4px 12px rgba(229,9,20,.5)}
+.nf-num{-webkit-text-stroke:2px #6b6b72;z-index:0!important;margin-right:-34px!important}.nf-top .nf-card{z-index:1}
+.nf-info{border-radius:0 0 9px 9px;border:1px solid rgba(255,255,255,.06);border-top:0}
+
+/* superfícies, botões, campos */
+.card,.ma-stage,.vn-stage,.in-card,.in-clue,.in-step,.sec,.ma-rank,.chat-box{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.012)),#17171b;border:1px solid rgba(255,255,255,.06);border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.28)}
+.page-head{border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:16px}
+.btn{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.08);border-radius:8px;transition:transform .2s var(--ease),background .2s,box-shadow .2s}.btn:hover{background:rgba(255,255,255,.16);transform:translateY(-1px)}
+.btn-primary,.btn-amber{background:linear-gradient(180deg,#f01824,#c10711);border-color:rgba(255,255,255,.12);box-shadow:0 8px 22px rgba(229,9,20,.3)}.btn-primary:hover,.btn-amber:hover{background:linear-gradient(180deg,#ff2432,#d2111c);box-shadow:0 12px 28px rgba(229,9,20,.42)}
+.field,input.field,select.field,textarea.field{background:#1d1d22;border:1px solid rgba(255,255,255,.08);border-radius:8px;transition:border-color .2s,box-shadow .2s}.field:focus{border-color:var(--nf-red);box-shadow:0 0 0 3px rgba(229,9,20,.22)}
+.chip{border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.06)}.chip.active{background:#fff;color:#000}
+.toast{background:rgba(22,22,26,.9);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:10px;box-shadow:0 14px 34px rgba(0,0,0,.5)}
+.modal-box{border:1px solid rgba(255,255,255,.07)}
+.empty{border:1px dashed rgba(255,255,255,.1);border-radius:12px;padding:34px 16px;color:#9a9aa6}.empty .big{filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}
+.ma-opt,.vn-choice{border-radius:10px}.ma-stage,.vn-stage{box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 0 1px rgba(212,175,55,.08)}
+.ma-end{border-color:var(--gold-soft);background:linear-gradient(180deg,rgba(212,175,55,.1),rgba(212,175,55,.02))}
+.msg.bot{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.05)}.msg.me{background:linear-gradient(180deg,#f01824,#c10711)}
+.chat-box{overflow:hidden}
+
+/* login */
+#authGate{background:radial-gradient(900px 600px at 70% 10%,rgba(229,9,20,.28),transparent 60%),radial-gradient(700px 500px at 0% 100%,rgba(212,175,55,.12),transparent 60%),#0a0a0c!important}
+#authGate::before{content:'';position:absolute;inset:0;background:var(--gate-img) center/contain no-repeat;opacity:.16;filter:blur(1px);mask-image:radial-gradient(circle,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(circle,#000 30%,transparent 75%)}
+#authGate .card{position:relative;background:rgba(18,18,22,.78)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1)!important;border-radius:16px!important;box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 0 1px rgba(212,175,55,.12);padding:28px!important;animation:nfRise .7s var(--ease) both}
+#authGate h2{font-family:var(--serif)!important;letter-spacing:.12em;font-size:30px!important}
+
+@media(max-width:820px){.nf-tabs{background:rgba(14,14,16,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.nf-tabs .on .ic{filter:drop-shadow(0 0 8px rgba(229,9,20,.8))}.brand span{font-size:21px}}
+@media(prefers-reduced-motion:reduce){.nf-embers,.nf-bb-emoji{animation:none!important;display:none}}
